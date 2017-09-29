@@ -7,6 +7,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>email.customers Maven Webapp</name>
   <url>http://maven.apache.org</url>
+   <properties>
+		<spring.version>4.0.6.RELEASE</spring.version>
+		<spring.security.version>3.2.5.RELEASE</spring.security.version>
+	</properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -24,6 +28,67 @@
     <artifactId>poi</artifactId>
     <version>3.8</version>
 </dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.5.Final</version>
+		</dependency>
+				<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- to use spring jdbc in the project we have to below dependency -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		   <!-- Below jars are used to develop spring mvc application -->
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- This  jar is responsible for spring and hibernate integration...................... -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
   </dependencies>
   <build>
     <finalName>email</finalName>
