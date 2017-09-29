@@ -1,0 +1,1 @@
+Create Table LoanApplicants(Name Varchar(255), Age int, Address Varchar(255), Mobile VarChar(255), Amount int, SSN VarChar(11));
