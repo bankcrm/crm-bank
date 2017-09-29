@@ -1,17 +1,33 @@
 package com.axon.bank.dao.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="LoanApplicants")
 public class ApplicantEntity {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	@Column(length=255)
 	String name;
+	@Column
 	int age;
+	@Column(length=255)
 	String address;
+	
+	@Column(length=255)
 	String mobile;
+	
+	@Column
 	int amount;
+	
+	@Column(length=255)
 	String ssn;
 	public String getName() {
 		return name;
