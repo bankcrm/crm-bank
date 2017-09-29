@@ -77,7 +77,7 @@ public class ReadAndSend {
 		                       		+ "<html>"
 		                       		+ "<body>"
 		                       		+ "Are you interested in a bank loan? <br/>"
-		                               + "<a href=\"http://localhost:8080/email/form.html\">Click here!</a>"
+		                               + "<a href=\"http://localhost:8080/crm-bank/form.html\">Click here!</a>"
 		                               + "</body></html>", "text/html");
 
 	                       Transport.send(message);
