@@ -19,6 +19,13 @@
 		console.log("#Req"+id);
 		$("#Req"+id).hide();
 	}
+	function accept(id){
+		console.log("#Req"+id);
+		$("#Header"+id).hide();
+	}
+	function reject(id){
+		$("#Header"+id).hide();	
+	}
 </script>
 </head>
 <body>
@@ -26,12 +33,20 @@
 <% ArrayList<ApplicantForm> applicants = (ArrayList<ApplicantForm>) request.getAttribute("applicants"); 
 	int id = 1;
 	for(ApplicantForm applicant : applicants){%>
-		<h2> Request #<%=id%>  <a href="javascript:expand('<%=id%>');">+</a><a href="javascript:unexpand('<%=id%>');">-</a></h2>
+		<div id="Header<%=id%>"><h2> Request #<%=id%>  <a href="javascript:expand('<%=id%>');">+</a><a href="javascript:unexpand('<%=id%>');">-</a></h2>
 		<div id="Req<%=id%>" style="display:none"> 
-		<%=applicant.toString() %>
+		Customer Name: <%=applicant.getName() %><br>
+		Age: <%=applicant.getAge() %><br>
+		Address: <%=applicant.getAddress() %><br>   
+		Mobile: <%=applicant.getMobile() %><br> 
+		Amount: <%=applicant.getAmount() %><br> 
+		Social Security Number: <%=applicant.getSsn() %><br>
+		Time Submitted: <%=applicant.getStatus() %><br>
+		<button onClick="accept('<%=id%>')">Accept</button> <button onClick="reject('<%=id%>')">Decline</button>
 		<br />
 		</div>
 		<br />
+		</div>
 <% 	id++;
 	}
 %>
