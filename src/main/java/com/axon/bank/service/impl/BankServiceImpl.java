@@ -1,5 +1,6 @@
 package com.axon.bank.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -33,8 +34,16 @@ public class BankServiceImpl implements BankService {
 
 	@Override
 	public List<ApplicantForm> selectAllApplicants() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("HITING THE DAO LAYER TO FETCH THE DATA FROM THE DATABASE");
+			
+		List<ApplicantEntity> applicantEntityList = bankDao.getLoanApplicants();
+		List<ApplicantForm> applicantFormList = new ArrayList<ApplicantForm>();
+		for(ApplicantEntity applicantEntity: applicantEntityList ){
+			ApplicantForm applicantForm = new ApplicantForm();
+			BeanUtils.copyProperties(applicantEntity, applicantForm);
+			applicantFormList.add(applicantForm);
+		}
+		return applicantFormList;
 	}
 
 }

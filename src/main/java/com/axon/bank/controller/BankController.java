@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.service.BankService;
@@ -22,10 +24,20 @@ public class BankController {
 	private BankController(){
 		System.out.println("Container is loading");
 	}
-	@RequestMapping(value="uploadApplicant", method=RequestMethod.POST)
-	public String uploadApplicant(@ModelAttribute ApplicantForm applicantForm, Model model){
+	@RequestMapping(value="/application", method=RequestMethod.POST,
+					consumes={"application/json", "application/xml"},
+					produces={"application/json", "application/xml"})
+	@ResponseBody
+	public AppMessageResponse uploadApplicant(@RequestBody ApplicantForm applicantForm){
+		System.out.println(applicantForm);
 		bankService.add(applicantForm);
-		model.addAttribute("message", "Hello my banker");
-		return "uploadApplicant";
+		AppMessageResponse appMessageResponse = new AppMessageResponse();
+		appMessageResponse.setStatus("success");
+		appMessageResponse.setMessage("applicant is upload");
+		appMessageResponse.setDescription("applicant is uploaded using rest api");
+		return appMessageResponse;
 	}
+	
+	//@RequestMapping(value="showApplicants", method=RequestMethod.GET)
+	//public 
 }

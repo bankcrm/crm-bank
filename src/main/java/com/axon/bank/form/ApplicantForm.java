@@ -2,9 +2,11 @@ package com.axon.bank.form;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="LoanApplicants")
+@XmlRootElement
 public class ApplicantForm {
 
 	String name;
