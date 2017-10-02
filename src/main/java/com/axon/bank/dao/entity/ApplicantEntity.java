@@ -1,5 +1,7 @@
 package com.axon.bank.dao.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +31,25 @@ public class ApplicantEntity {
 	
 	@Column(length=255)
 	String ssn;
+	
+	@Column
+	Timestamp dateCreated;
+	
+	@Column(length=10)
+	String status;
+	
+	public Timestamp getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getName() {
 		return name;
 	}
@@ -67,8 +88,9 @@ public class ApplicantEntity {
 	}
 	@Override
 	public String toString() {
-		return "ApplicantEntity [id= " + id + ", name=" + name + ", age=" + age + ", address=" + address + ", mobile=" + mobile
-				+ ", amount=" + amount + ", ssn=" + ssn + "]";
+		return "ApplicantEntity [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", mobile="
+				+ mobile + ", amount=" + amount + ", ssn=" + ssn + ", dateCreated=" + dateCreated + ", status=" + status
+				+ "]";
 	}
 	
 }
