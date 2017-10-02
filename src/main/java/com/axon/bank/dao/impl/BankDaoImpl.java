@@ -34,9 +34,7 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 
 	@Override
 	public List<ApplicantEntity> getLoanApplicants() {
-		System.out.println("Not implimented");
-		// TODO Auto-generated method stub
-		return null;
+		return (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity");
 	}
 
 }

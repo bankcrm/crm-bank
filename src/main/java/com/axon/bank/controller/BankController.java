@@ -1,5 +1,7 @@
 package com.axon.bank.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -27,5 +29,16 @@ public class BankController {
 		bankService.add(applicantForm);
 		model.addAttribute("message", "Hello my banker");
 		return "uploadApplicant";
+	}
+	
+	
+	@RequestMapping(value="viewApplicants", method=RequestMethod.GET)
+	public String uploadApplicant(Model model){
+		List<ApplicantForm> applicants = bankService.selectAllApplicants();
+		for(ApplicantForm applicant : applicants){
+			System.out.println(applicant.toString());
+			model.addAttribute(applicant.toString());
+		}
+		return "applicantList";
 	}
 }
