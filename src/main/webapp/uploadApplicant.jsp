@@ -21,7 +21,7 @@
 <body>
 	<span style="color: red; font-size: 16px;">${message}</span>
 	<div class="bs-example" style="margin-left: 30px;">
-		<form action="uploadApplicant.do" method="post" class="form-horizontal">
+		<form action="bank/uploadApplicant" method="post" class="form-horizontal">
 			<table>
 				<tr>
 					<td>

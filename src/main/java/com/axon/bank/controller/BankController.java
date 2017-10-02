@@ -12,7 +12,7 @@ import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.service.BankService;
 
 @Controller
-//@RequestMapping("/bank")
+@RequestMapping("/bank")
 public class BankController {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class BankController {
 	@RequestMapping(value="uploadApplicant", method=RequestMethod.POST)
 	public String uploadApplicant(@ModelAttribute ApplicantForm applicantForm, Model model){
 		bankService.add(applicantForm);
-		model.addAttribute("Hello my banker");
+		model.addAttribute("message", "Hello my banker");
 		return "uploadApplicant";
 	}
 }
