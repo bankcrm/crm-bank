@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ApplicantForm {
 
+	private int id;
 	String name;
 	int age;
 	String address;
@@ -22,6 +23,13 @@ public class ApplicantForm {
 		status = "pending";
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
@@ -72,8 +80,9 @@ public class ApplicantForm {
 	}
 	@Override
 	public String toString() {
-		return "ApplicantForm [name=" + name + ", age=" + age + ", address=" + address + ", mobile=" + mobile
-				+ ", amount=" + amount + ", ssn=" + ssn + ", dateCreated=" + dateCreated + ", status=" + status + "]";
+		return "ApplicantForm [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", mobile="
+				+ mobile + ", amount=" + amount + ", ssn=" + ssn + ", dateCreated=" + dateCreated + ", status=" + status
+				+ "]";
 	}
 	
 }

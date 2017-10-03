@@ -46,4 +46,22 @@ public class BankServiceImpl implements BankService {
 
 	}
 
+	@Override
+	public void changeStatus(int id, String status) {
+		bankDao.changeStatus(id, status);
+	}
+
+	@Override
+	public List<ApplicantForm> selectPendingApplicants() {
+		List<ApplicantEntity> applicantEntities = bankDao.getPendingApplicants();
+		List<ApplicantForm> applicantForms = new ArrayList<ApplicantForm>();
+		for(ApplicantEntity entity : applicantEntities){
+			System.out.println("Entity: " + entity);
+			ApplicantForm form = new ApplicantForm();
+			BeanUtils.copyProperties(entity, form);
+			applicantForms.add(form);
+		}
+		return applicantForms;
+	}
+
 }

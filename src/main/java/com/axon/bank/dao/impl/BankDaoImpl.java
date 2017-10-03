@@ -35,9 +35,7 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 
 	@Override
 	public List<ApplicantEntity> getLoanApplicants() {
-
 		return (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity");
-
 	}
 	
 	@Override
@@ -65,6 +63,22 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		return loginEntity;
 		
 		
+	}
+
+
+	@Override
+	public String changeStatus(int id, String status) {
+		List<ApplicantEntity> apps = (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity where id=?", id);
+		ApplicantEntity applicant = apps.get(0);
+		applicant.setStatus(status);
+		super.getHibernateTemplate().save(applicant);
+		return "success";
+	}
+
+
+	@Override
+	public List<ApplicantEntity> getPendingApplicants() {
+		return (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity where status=?","pending");
 	}
 
 }

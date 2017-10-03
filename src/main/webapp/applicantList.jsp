@@ -33,6 +33,7 @@
 <% ArrayList<ApplicantForm> applicants = (ArrayList<ApplicantForm>) request.getAttribute("applicants"); 
 	int id = 1;
 	for(ApplicantForm applicant : applicants){%>
+		id = applicant.getId();
 		<div id="Header<%=id%>"><h2> Request #<%=id%>  <a href="javascript:expand('<%=id%>');">+</a><a href="javascript:unexpand('<%=id%>');">-</a></h2>
 		<div id="Req<%=id%>" style="display:none"> 
 		Customer Name: <%=applicant.getName() %><br>
@@ -41,13 +42,13 @@
 		Mobile: <%=applicant.getMobile() %><br> 
 		Amount: <%=applicant.getAmount() %><br> 
 		Social Security Number: <%=applicant.getSsn() %><br>
-		Time Submitted: <%=applicant.getStatus() %><br>
+		Time Submitted: <%=applicant.getDateCreated() %><br>
 		<button onClick="accept('<%=id%>')">Accept</button> <button onClick="reject('<%=id%>')">Decline</button>
 		<br />
 		</div>
 		<br />
 		</div>
-<% 	id++;
+<% 	
 	}
 %>
 
