@@ -1,11 +1,10 @@
 package com.axon.bank.form;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
-@Table(name="LoanApplicants")
 @XmlRootElement
 public class ApplicantForm {
 
@@ -15,6 +14,26 @@ public class ApplicantForm {
 	String mobile;
 	int amount;
 	String ssn;
+	Timestamp dateCreated;
+	String status;
+	
+	public ApplicantForm(){
+		dateCreated = Timestamp.valueOf(LocalDateTime.now());
+		status = "pending";
+	}
+	
+	public Timestamp getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getName() {
 		return name;
 	}
@@ -53,8 +72,8 @@ public class ApplicantForm {
 	}
 	@Override
 	public String toString() {
-		return "ApplicantEntity [name=" + name + ", age=" + age + ", address=" + address + ", mobile=" + mobile
-				+ ", amount=" + amount + ", ssn=" + ssn + "]";
+		return "ApplicantForm [name=" + name + ", age=" + age + ", address=" + address + ", mobile=" + mobile
+				+ ", amount=" + amount + ", ssn=" + ssn + ", dateCreated=" + dateCreated + ", status=" + status + "]";
 	}
 	
 }

@@ -48,13 +48,21 @@ public class BankController {
 	
 
 	@RequestMapping(value="viewApplicants", method=RequestMethod.GET)
-	public String uploadApplicant(Model model){
+	public String printApplicants(Model model){
 		List<ApplicantForm> applicants = bankService.selectAllApplicants();
 		for(ApplicantForm applicant : applicants){
 			System.out.println(applicant.toString());
 			model.addAttribute(applicant.toString());
 		}
+		model.addAttribute("applicants", applicants);
 		return "applicantList";
+	}
+	
+	@RequestMapping(value="/applications", method=RequestMethod.GET,
+			produces={"application/json", "application/xml"})
+	@ResponseBody
+	public List<ApplicantForm> viewApplicants(){
+		return bankService.selectAllApplicants();
 	}
 
 }
