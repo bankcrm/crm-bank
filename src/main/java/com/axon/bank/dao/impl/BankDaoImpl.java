@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.axon.bank.dao.BankDao;
+import com.axon.bank.dao.entity.AgentCustomerEntity;
 import com.axon.bank.dao.entity.ApplicantEntity;
+import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.dao.entity.LoginEntity;
 
 @Repository("BankDaoImpl")
@@ -79,6 +81,27 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 	@Override
 	public List<ApplicantEntity> getPendingApplicants() {
 		return (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity where status=?","pending");
+	}
+
+
+	@Override
+	public ApplicantEntity getLoanApplicant(int id) {
+		List<ApplicantEntity> apps = (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity where id=?", id);
+		return apps.get(0);
+	}
+
+
+	@Override
+	public void makeCustomer(CustomerEntity customer) {
+		super.getHibernateTemplate().save(customer);
+		System.out.println("Added customer");	
+	}
+
+
+	@Override
+	public void addAgentCustomerRelation(AgentCustomerEntity ace) {
+		super.getHibernateTemplate().save(ace);
+		System.out.println("Added relation");	
 	}
 
 }
