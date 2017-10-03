@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.axon.bank.dao.entity.ApplicantEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.service.BankService;
 
@@ -49,7 +50,7 @@ public class BankController {
 
 	@RequestMapping(value="viewApplicants", method=RequestMethod.GET)
 	public String printApplicants(Model model){
-		List<ApplicantForm> applicants = bankService.selectAllApplicants();
+		List<ApplicantForm> applicants = bankService.selectPendingApplicants();
 		for(ApplicantForm applicant : applicants){
 			System.out.println(applicant.toString());
 			model.addAttribute(applicant.toString());
@@ -63,6 +64,19 @@ public class BankController {
 	@ResponseBody
 	public List<ApplicantForm> viewApplicants(){
 		return bankService.selectAllApplicants();
+	}
+	
+	@RequestMapping(value="/statuschange", method=RequestMethod.PUT,
+			consumes={"application/json", "application/xml"},
+			produces={"application/json", "application/xml"})
+	@ResponseBody
+	public AppMessageResponse changeStatus(@RequestBody ApplicantForm applicant){
+	System.out.println(applicant.getId());
+	bankService.changeStatus(applicant.getId(),applicant.getStatus());
+	AppMessageResponse appMessageResponse = new AppMessageResponse();
+	appMessageResponse.setStatus("success");
+	appMessageResponse.setMessage("status changed");
+	return appMessageResponse;
 	}
 
 }
