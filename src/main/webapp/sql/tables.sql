@@ -5,3 +5,12 @@ Create Table LoanApplicants(Name Varchar(255), Age int, Address Varchar(255), Mo
 ALTER TABLE LoanApplicants ADD id int;
 ALTER TABLE LoanApplicants ADD PRIMARY KEY (id);
 alter table LoanApplicants modify column id int auto_increment;
+
+
+create table loginEntity(
+	lid int not null auto_increment,
+	username varchar(50),
+	password varchar(50),
+	role varchar(50),
+	primary key (lid)
+);

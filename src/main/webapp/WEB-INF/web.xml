@@ -2,25 +2,36 @@
 	xmlns:web="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>Archetype Created Web Application</display-name>
-	
-	
-<listener>
-  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
 
-<!-- <listener>
-  	<description>This will load data into the cache once the application is ready</description>
-  	<listener-class>com.axon.bank.app.dataloader.BankDataLoaderListener</listener-class>
-  </listener> -->
-   <servlet>
-  	<servlet-name>bank</servlet-name>
-  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-  	<load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>bank</servlet-name>
-  	<url-pattern>/</url-pattern>
-  </servlet-mapping>
-  
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- <listener> <description>This will load data into the cache once the 
+		application is ready</description> <listener-class>com.axon.bank.app.dataloader.BankDataLoaderListener</listener-class> 
+		</listener> -->
+	<servlet>
+		<servlet-name>bank</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>bank</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+ <welcome-file-list>
+  	<welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>

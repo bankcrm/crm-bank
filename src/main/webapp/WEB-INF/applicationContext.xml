@@ -15,7 +15,7 @@
 				
 				<import resource="bank-service.xml"/>
 				<import resource="bank-dao.xml"/>
-				
+				<import resource="bank-spring-security.xml"/>
 				<import resource="spring-hibernate-service.xml"/>
 				
 				
