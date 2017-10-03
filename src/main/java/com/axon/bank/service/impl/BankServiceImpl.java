@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.axon.bank.dao.BankDao;
+import com.axon.bank.dao.entity.AgentCustomerEntity;
 import com.axon.bank.dao.entity.ApplicantEntity;
+import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.service.BankService;
 
@@ -49,6 +51,17 @@ public class BankServiceImpl implements BankService {
 	@Override
 	public void changeStatus(int id, String status) {
 		bankDao.changeStatus(id, status);
+		if(status.equals("accepted")){
+			ApplicantEntity applicant = bankDao.getLoanApplicant(id);
+			CustomerEntity customer = new CustomerEntity();
+			BeanUtils.copyProperties(applicant, customer);
+			bankDao.makeCustomer(customer);
+			AgentCustomerEntity ace = new AgentCustomerEntity();
+			ace.setAgent(null);
+			ace.setCustomerId(id);
+			ace.setStatus(6/22);
+			bankDao.addAgentCustomerRelation(ace);
+		}
 	}
 
 	@Override
