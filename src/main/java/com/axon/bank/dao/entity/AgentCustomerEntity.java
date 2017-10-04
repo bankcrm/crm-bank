@@ -14,7 +14,7 @@ public class AgentCustomerEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Column(length=255)
+	@Column
 	int agent;
 	@Column
 	int customerId;

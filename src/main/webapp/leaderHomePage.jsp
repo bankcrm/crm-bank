@@ -10,6 +10,7 @@
 <script type="text/javascript">
 var contents ="";
 var myContents ="";
+var myData ="";
 $(document).ready(function(){
 	var purl ="http://localhost:8080/crm-bank/bank/leaderHome";
 	$.ajax({
@@ -21,6 +22,8 @@ $(document).ready(function(){
 			success : function(jsonData) {
 				contents="";
 				console.log(jsonData);
+				myData = jsonData;
+				console.log(myData);
 				for(var i=0; i<jsonData.length; i++){
 					addAgentResult(jsonData[i]);
 				}
@@ -71,7 +74,7 @@ function addApplicantResult(row){
 	myContents = myContents + '<tr>';
 	myContents = myContents + '<td>'+row.name+'</td>';
 	myContents = myContents + '<td>'+row.amount+'</td>';
-	myContents = myContents + '<td>'+row.name+'</td>';
+	myContents = myContents + '<td>'+myData[0].username+'</td>';
 	myContents = myContents + '</tr>';
 }
 </script>
@@ -111,6 +114,26 @@ function addApplicantResult(row){
      </tr>
   	</thead>
   	<tbody id="applicantTable">
+  	  <tr>
+  	  	<td>gggg</td>
+  	  	<td>88888</td>
+  	  	<td>8888</td>
+  	  </tr>
+  	</tbody>
+</table>
+</div>
+<div class="container" >
+  <h2>All the progress are here</h2>
+  
+<table class="table" style="width:500px">
+	<thead>
+      <tr>
+      	<th>Agent Name</th>
+      	<th>Customer name</th>
+      	<th>Status</th>
+     </tr>
+  	</thead>
+  	<tbody id="progressTable">
   	  <tr>
   	  	<td>gggg</td>
   	  	<td>88888</td>
