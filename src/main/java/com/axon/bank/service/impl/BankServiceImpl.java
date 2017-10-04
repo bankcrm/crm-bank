@@ -14,6 +14,7 @@ import com.axon.bank.dao.entity.AgentCustomerEntity;
 import com.axon.bank.dao.entity.ApplicantEntity;
 import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.form.ApplicantForm;
+import com.axon.bank.form.CustomerForm;
 import com.axon.bank.service.BankService;
 
 @Service("BankServiceImpl")
@@ -75,6 +76,26 @@ public class BankServiceImpl implements BankService {
 			applicantForms.add(form);
 		}
 		return applicantForms;
+	}
+
+	@Override
+	public List<CustomerForm> selectAgentsCustomers(String name) {
+		List<CustomerEntity> customerEntities = bankDao.getAgentsCustomers(name);
+		List<CustomerForm> customerForms = new ArrayList<CustomerForm>();
+		for(CustomerEntity entity : customerEntities){
+			System.out.println("Entity: " + entity);
+			CustomerForm form = new CustomerForm();
+			BeanUtils.copyProperties(entity, form);
+			customerForms.add(form);
+		}
+		return customerForms;
+	}
+
+	@Override
+	public void updateCustomer(CustomerForm customerForm) {
+		CustomerEntity customerEntity = new CustomerEntity();
+		BeanUtils.copyProperties(customerForm, customerEntity);
+		bankDao.updateCustomer(customerEntity);
 	}
 
 }

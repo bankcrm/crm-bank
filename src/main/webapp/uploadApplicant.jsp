@@ -82,13 +82,13 @@ $(document).ready(function(){
 		console.log("validation start");
 		if($("#name").val() == ""){
 			alert("A name must be given.");
-		} else if ($("#age").val() < 1){
+		} else if ($("#age").val() < 1 || isNan($("#amount").val())){
 			alert("Age can not be a negative number!");
 		} else if ($("#address").val() == ""){
 			alert("Address must be inserted.");
 		} else if (checkMobile($("#mobile").val())){
 			alert("Insert a valid mobile number. A valid phone number consists of 10 numbers and dashes.");
-		} else if ($("#amount").val() < 1){
+		} else if ($("#amount").val() < 1 || isNaN($("#amount").val())){
 			alert("A loan is not a loan without asking for an amount of money.");
 		} else if (checkSSN($("#ssn").val())){
 			alert("Insert a valid Social Security Number. A valid SSN number consists of 9 numbers and dashes.");

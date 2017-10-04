@@ -1,5 +1,6 @@
 package com.axon.bank.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -102,6 +103,24 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 	public void addAgentCustomerRelation(AgentCustomerEntity ace) {
 		super.getHibernateTemplate().save(ace);
 		System.out.println("Added relation");	
+	}
+
+
+	@Override
+	public List<CustomerEntity> getAgentsCustomers(String name) {
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where agent = ?", name);
+		List<CustomerEntity> customers = new ArrayList<>();
+		for(AgentCustomerEntity relation : relations){
+		 customers.addAll((List<CustomerEntity>) super.getHibernateTemplate().find("from CustomerEntity where id=?",relation.getCustomerId()));
+		}
+		 return customers;
+	}
+
+
+	@Override
+	public void updateCustomer(CustomerEntity customerEntity) {
+		System.out.println("Merging: " + customerEntity);
+		super.getHibernateTemplate().merge(customerEntity);
 	}
 
 }

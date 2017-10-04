@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.axon.bank.dao.entity.ApplicantEntity;
 import com.axon.bank.form.ApplicantForm;
+import com.axon.bank.form.CustomerForm;
 import com.axon.bank.service.BankService;
 
 @Controller
@@ -59,6 +62,19 @@ public class BankController {
 		return "applicantList";
 	}
 	
+	@RequestMapping(value="agentcustomers", method=RequestMethod.GET)
+	public String printCustomers(Model model){
+		System.out.println("Gets an Agent's Customers");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();;
+		List<CustomerForm> customers = bankService.selectAgentsCustomers(auth.getName());
+		for(CustomerForm customer : customers){
+			System.out.println(customer.toString());
+			model.addAttribute(customer.toString());
+		}
+		model.addAttribute("customers", customers);
+		return "agentHome";
+	}
+	
 	@RequestMapping(value="/applications", method=RequestMethod.GET,
 			produces={"application/json", "application/xml"})
 	@ResponseBody
@@ -76,6 +92,19 @@ public class BankController {
 	AppMessageResponse appMessageResponse = new AppMessageResponse();
 	appMessageResponse.setStatus("success");
 	appMessageResponse.setMessage("status changed");
+	return appMessageResponse;
+	}
+	
+	@RequestMapping(value="/updatecustomer", method=RequestMethod.POST,
+			consumes={"application/json", "application/xml"},
+			produces={"application/json", "application/xml"})
+	@ResponseBody
+	public AppMessageResponse changeStatus(@RequestBody CustomerForm customer){
+	System.out.println("Updating: " + customer);
+	bankService.updateCustomer(customer);
+	AppMessageResponse appMessageResponse = new AppMessageResponse();
+	appMessageResponse.setStatus("success");
+	appMessageResponse.setMessage("Customer Updated");
 	return appMessageResponse;
 	}
 
