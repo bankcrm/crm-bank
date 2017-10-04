@@ -14,7 +14,6 @@ import javax.persistence.Table;
 public class CustomerEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Column(length=255)
 	String name;

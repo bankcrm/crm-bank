@@ -149,4 +149,23 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 	
 	
 
+
+	@Override
+	public List<CustomerEntity> getAgentsCustomers(String name) {
+		List<LoginEntity> login = (List<LoginEntity>) super.getHibernateTemplate().find("from LoginEntity where username = ?", name);
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where agent = ?", login.get(0).getLid());
+		List<CustomerEntity> customers = new ArrayList<>();
+		for(AgentCustomerEntity relation : relations){
+		 customers.addAll((List<CustomerEntity>) super.getHibernateTemplate().find("from CustomerEntity where id=?",relation.getCustomerId()));
+		}
+		 return customers;
+	}
+
+
+	@Override
+	public void updateCustomer(CustomerEntity customerEntity) {
+		System.out.println("Merging: " + customerEntity);
+		super.getHibernateTemplate().merge(customerEntity);
+	}
+
 }

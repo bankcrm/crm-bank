@@ -81,6 +81,25 @@ public class BankServiceImpl implements BankService {
 	}
 
 	@Override
+	public List<CustomerForm> selectAgentsCustomers(String name) {
+		List<CustomerEntity> customerEntities = bankDao.getAgentsCustomers(name);
+		List<CustomerForm> customerForms = new ArrayList<CustomerForm>();
+		for(CustomerEntity entity : customerEntities){
+			System.out.println("Entity: " + entity);
+			CustomerForm form = new CustomerForm();
+			BeanUtils.copyProperties(entity, form);
+			customerForms.add(form);
+		}
+		return customerForms;
+	}
+
+	@Override
+	public void updateCustomer(CustomerForm customerForm) {
+		CustomerEntity customerEntity = new CustomerEntity();
+		BeanUtils.copyProperties(customerForm, customerEntity);
+		bankDao.updateCustomer(customerEntity);
+	}
+	
 	public List<LoginForm> getConnectedAgent() {
 		List<LoginEntity> agentEntities = bankDao.getConnectedAgent();
 		List<LoginForm> agentForms = new ArrayList<LoginForm>();
