@@ -1,5 +1,6 @@
 package com.axon.bank.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -27,7 +28,9 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		super.setSessionFactory(sessionFactory);
 	}
 	
-	
+	/**
+	 * This method is upload applicant information
+	 */
 	@Override
 	public void addLoanApplicant(ApplicantEntity applicantEntity) {
 		super.getHibernateTemplate().save(applicantEntity);
@@ -35,11 +38,48 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		
 	}
 
+	/**
+	 * This method is to get the list of all applicants
+	 */
 	@Override
 	public List<ApplicantEntity> getLoanApplicants() {
 		return (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity");
 	}
 	
+	/**
+	 * This method is to get the list of all connected agents at the team leader page
+	 */
+	@Override
+	public List<LoginEntity> getConnectedAgent(){
+		List<LoginEntity> agentList = (List<LoginEntity>)super.getHibernateTemplate().find("from LoginEntity where role='agent' and status = 1");
+	    return agentList;
+	}
+	/**
+	 * This method is to get the accepted request applicants at the team leader page
+	 * @return applicantList
+	 */
+	@Override
+	public List<CustomerEntity> getAcceptedApplicants(){
+		List<AgentCustomerEntity> agentCustomerList = getAgentCustomerList();
+		System.out.println(agentCustomerList);
+		List<CustomerEntity> applicantList = new ArrayList<CustomerEntity>();
+		for(AgentCustomerEntity entity : agentCustomerList){
+			System.out.println(entity.getAgent());
+			List<CustomerEntity> customer = (List<CustomerEntity>)super.getHibernateTemplate().find("from CustomerEntity where id = " + entity.getCustomerId());
+			applicantList.add(customer.get(0));
+			
+		}
+		
+		return applicantList;
+	}
+	
+	public List<AgentCustomerEntity> getAgentCustomerList(){
+		List<AgentCustomerEntity> agentCustomerList = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where agent = 1");
+		return agentCustomerList;
+	}
+	/**
+	 * This method is for spring security
+	 */
 	@Override
 	public String authUser(String username, String password){
 		String role = "";
@@ -52,6 +92,9 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		return role;
 	}
 	
+	/**
+	 * This method is also a utility method for spring security
+	 */
 	@Override
 	public LoginEntity findRoleByUsername(String username){
 		LoginEntity loginEntity = null;
@@ -103,5 +146,7 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		super.getHibernateTemplate().save(ace);
 		System.out.println("Added relation");	
 	}
+	
+	
 
 }

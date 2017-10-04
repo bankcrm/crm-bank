@@ -1,27 +1,12 @@
-package com.axon.bank.dao.entity;
+package com.axon.bank.form;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="loginEntity")
-public class LoginEntity {
+public class LoginForm {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int lid;
-	
-	@Column(length=50)
 	private String username;
-	@Column(length=50)
 	private String password;
-	@Column(length=50)
 	private String role;
-	@Column
 	private int status;
 	public int getStatus() {
 		return status;
@@ -53,7 +38,9 @@ public class LoginEntity {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "LoginForm [lid=" + lid + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+	}
 	
 }

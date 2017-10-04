@@ -17,5 +17,7 @@ public interface BankDao {
 	public ApplicantEntity getLoanApplicant(int id);
 	public void makeCustomer(CustomerEntity customer);
 	public void addAgentCustomerRelation(AgentCustomerEntity ace);
+	public List<LoginEntity> getConnectedAgent();
+	public List<CustomerEntity> getAcceptedApplicants();
 
 }
