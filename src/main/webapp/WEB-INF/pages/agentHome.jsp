@@ -24,7 +24,6 @@ $(document).ready(function(){
 		var id = $(document.activeElement).val();
 		console.log(id);
 		console.log($("#name"+id).val());
-		alert("test");
 		var customer = new Object();
 		customer.id=id;
 		customer.name= $("#name"+id).val();
@@ -109,7 +108,7 @@ $(document).ready(function(){
 		Loan Details: <input type="text" id="loandetails<%=id%>" value="<%=customer.getLoanDetails() %>"><br>	
 		Amount of EMIs: <input type="text" id="emis<%=id%>" value="<%=customer.getEmiCount() %>"><br>	
 		Email: <input type="text" id="email<%=id%>" value="<%=customer.getEmail() %>"><br>	
-		<button id="save<%=id%>" class="save" value="<%=id%>">Save</button>
+		<button type="button" id="save<%=id%>" class="save" value="<%=id%>">Save</button>
 		</form>	
 		<br />
 		</div>

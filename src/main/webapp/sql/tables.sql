@@ -14,3 +14,15 @@ create table loginEntity(
 	role varchar(50),
 	primary key (lid)
 );
+
+ALTER TABLE loginEntity ADD status int;
+
+create table AgentCustomerRelation(
+	id int not null auto_increment,
+	agent int default 1,
+	customerId int,
+	status double,
+	primary key (id),
+	foreign key (customerId) references Customers (id),
+	foreign key (agent) references loginEntity (lid)
+);

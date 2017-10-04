@@ -15,7 +15,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	function sendAjax() {
+	 function sendAjax() {
 		 
 	    // get inputs
 		var article = new Object();
@@ -39,7 +39,7 @@ $(document).ready(function(){
 	            alert("error: "+data+" status: "+status+" er:"+er);
 	        }
 	    });
-	}
+	} 
 
 	
 	$("#upload").click(function(){

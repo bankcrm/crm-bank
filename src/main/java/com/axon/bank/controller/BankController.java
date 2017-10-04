@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.axon.bank.dao.entity.ApplicantEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.form.CustomerForm;
+import com.axon.bank.form.LoginForm;
 import com.axon.bank.service.BankService;
 
 @Controller
@@ -95,6 +95,7 @@ public class BankController {
 	return appMessageResponse;
 	}
 	
+
 	@RequestMapping(value="/updatecustomer", method=RequestMethod.POST,
 			consumes={"application/json", "application/xml"},
 			produces={"application/json", "application/xml"})
@@ -107,5 +108,21 @@ public class BankController {
 	appMessageResponse.setMessage("Customer Updated");
 	return appMessageResponse;
 	}
+
+
+	@RequestMapping(value="leaderHome", method=RequestMethod.GET, produces= {"application/json"})
+	@ResponseBody
+	public List<LoginForm> getConnectedAgent(){
+		List<LoginForm> agentList = bankService.getConnectedAgent();
+		return agentList;
+	}
+	
+	@RequestMapping(value="acceptedRequest", method=RequestMethod.GET, produces= {"application/json"})
+	@ResponseBody
+	public List<CustomerForm> getAcceptedApplicants(){
+		List<CustomerForm> applicantList = bankService.getAcceptedApplicants();
+		return applicantList;
+	}
+	
 
 }

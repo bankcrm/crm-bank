@@ -14,16 +14,16 @@ public class AgentCustomerEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Column(length=255)
-	String agent;
+	@Column
+	int agent;
 	@Column
 	int customerId;
 	@Column
 	double status;
-	public String getAgent() {
+	public int getAgent() {
 		return agent;
 	}
-	public void setAgent(String agent) {
+	public void setAgent(int agent) {
 		this.agent = agent;
 	}
 	public int getCustomerId() {
