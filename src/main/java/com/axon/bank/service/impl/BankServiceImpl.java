@@ -61,7 +61,7 @@ public class BankServiceImpl implements BankService {
 			setUpCustomer(customer);
 			bankDao.makeCustomer(customer);
 			AgentCustomerEntity ace = new AgentCustomerEntity();
-			ace.setAgent(123);
+			ace.setAgent(1);
 			ace.setCustomerId(id);
 			ace.setStatus((double)6/21);
 			bankDao.addAgentCustomerRelation(ace);

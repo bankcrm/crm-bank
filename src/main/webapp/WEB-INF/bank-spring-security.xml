@@ -15,11 +15,11 @@
 	
 	<security:intercept-url pattern="/bank/**" access="permitAll"/>
 	 	
-		 <security:intercept-url pattern="/mybank/**" access="hasAnyRole('admin','agent')"/> 
+		 <security:intercept-url pattern="/mybank/**" access="hasAnyRole('admin','agent','team leader')"/> 
 		
 		<security:form-login login-page="/mybank/auth"
 				authentication-failure-url="/mybank/invalidLogin" 
-				default-target-url="/mybank/homePage"/>
+				default-target-url="/mybank/redirectHome"/>
 		
 		<security:logout invalidate-session="true" logout-success-url="/mybank/auth" logout-url="/mybank/logout"/>		
 		

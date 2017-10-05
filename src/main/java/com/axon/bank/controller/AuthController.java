@@ -1,14 +1,22 @@
 package com.axon.bank.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.axon.bank.form.CustomerForm;
 import com.axon.bank.service.AuthService;
 
 @Controller
@@ -46,13 +54,29 @@ public class AuthController {
 	}
 	@RequestMapping(value="auth-user", method=RequestMethod.POST)
 	public String authUser(String username, String password, HttpSession session, Model model){
-		String nextPage="homePage";
 		String role = authService.authUser(username, password);	
+		String nextPage="homePage";
 		if(role.length() > 0){
 			session.setAttribute("username", username);
 			session.setAttribute("role", role);
 		}else{
 			return "login";
+		}
+		return nextPage;
+	}
+	
+	@RequestMapping(value="redirectHome", method=RequestMethod.GET)
+	public String redirectHome(){
+		String nextPage="homePage";
+		Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		for(GrantedAuthority role : roles){
+			if(role.equals("agent")){
+				nextPage="redirect:/bank/agentcustomers";
+			} else if(role.equals("team leader")){
+				nextPage="leaderHomePage";
+			} else if(role.equals("admin")){
+				nextPage="adminHomePage";
+			}
 		}
 		return nextPage;
 	}
