@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Applicants</title>
+<title>Customer List</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -153,34 +153,43 @@ function validate(id){
 </head>
 <body>
 
+<div style="background-color:#<%=JSPHelper.pickColor((String)request.getAttribute("username"))%>">
+<br>
+<center><h1> Hello <%= request.getAttribute("username") %>!</h1></center>
+<br>
+
+<center><h1>Here are the customers you are currently assigned to:</h1></center>
+</div>
+
 <% ArrayList<CustomerForm> customers = (ArrayList<CustomerForm>) request.getAttribute("customers"); 
 	int id;
 	for(CustomerForm customer : customers){
 		id = customer.getId();%>
-		<div id="Header<%=id%>"><h2> Customer #<%=id%>  <a href="javascript:expand('<%=id%>');">+</a><a href="javascript:unexpand('<%=id%>');">-</a></h2>
+		<div id="Header<%=id%>" style="background-color:#<%=JSPHelper.pickColor()%>">
+		<center><h2> Customer #<%=id%>  <button onClick="javascript:expand('<%=id%>');"> + </button>     <button onClick="javascript:unexpand('<%=id%>');">  -  </button></h2></center>
 		<div id="Cst<%=id%>" style="display:none"> 
-		<form name="Cstform<%=id%>">
-		Customer Name: <input type="text" id="name<%=id%>" <%=JSPHelper.pickString(customer.getName()) %>><br>
-		Age: <input type="text" id="age<%=id%>" <%=JSPHelper.pickString(customer.getAge()) %>><br>
-		Address: <input type="text" id="address<%=id%>" <%=JSPHelper.pickString(customer.getAddress()) %>><br>   
-		Mobile: <input type="text" id="mobile<%=id%>" <%=JSPHelper.pickString(customer.getMobile()) %>><br> 
-		Amount: <input type="text" id="amount<%=id%>" <%=JSPHelper.pickString(customer.getAmount()) %>><br> 
-		Social Security Number: <input type="text" id="ssn<%=id%>" <%=JSPHelper.pickString(customer.getSsn()) %>><br>	
-		Gender: <input type="text" id="gender<%=id%>" <%=JSPHelper.pickString(customer.getGender()) %>><br>	
-		City: <input type="text" id="city<%=id%>" <%=JSPHelper.pickString(customer.getCity()) %>><br>
-		Company: <input type="text" id="company<%=id%>" <%=JSPHelper.pickString(customer.getCompany()) %>><br>	
-		Salaried? <input type="text" id="salaried<%=id%>" value="<%=customer.isSalaried() %>"><br>
-		Salary: <input type="text" id="salary<%=id%>" <%=JSPHelper.pickString(customer.getSalary()) %>><br>	
-		Salary Account: <input type="text" id="salaryacc<%=id%>" <%=JSPHelper.pickString(customer.getSalaryAccount()) %>><br>	
-		Date Company Was Joined: <input type="date" id="joindate<%=id%>" <%=JSPHelper.pickString(customer.getCompanyJoinDate())%>><br>	
-		Years of Working Experience: <input type="text" id="experience<%=id%>" <%=JSPHelper.pickString(customer.getAmountOfExperience()) %>><br>	
-		How long they have been located in the area: <input type="text" id="located<%=id%>" <%=JSPHelper.pickString(customer.getTimeInArea()) %>><br>	
-		When they last moved: <input type="date" id="lastmoved<%=id%>" <%=JSPHelper.pickString(customer.getLastmove()) %>><br>	
-		Home Details: <input type="text" id="homedetails<%=id%>" <%=JSPHelper.pickString(customer.getHomedetails()) %>><br>	
-		Date Of Birth: <input type="date" id="dob<%=id%>"  <%=JSPHelper.pickString(customer.getDob()) %>><br>	
-		Loan Details: <input type="text" id="loandetails<%=id%>" <%=JSPHelper.pickString(customer.getLoanDetails()) %>><br>	
-		Amount of EMIs: <input type="text" id="emis<%=id%>" <%=JSPHelper.pickString(customer.getEmiCount()) %>><br>	
-		Email: <input type="text" id="email<%=id%>" <%=JSPHelper.pickString(customer.getEmail()) %>><br>	
+		<form name="Cstform<%=id%>">				
+		<div class="form-group"><label>Customer Name:</label><input type="text" id="name<%=id%>" <%=JSPHelper.pickString(customer.getName()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>
+		<div class="form-group"><label>Age: </label><input type="text" id="age<%=id%>" <%=JSPHelper.pickString(customer.getAge()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>
+		<div class="form-group"><label>Address: </label><input type="text" id="address<%=id%>" <%=JSPHelper.pickString(customer.getAddress()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>   
+		<div class="form-group"><label>Mobile: </label><input type="text" id="mobile<%=id%>" <%=JSPHelper.pickString(customer.getMobile()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div> 
+		<div class="form-group"><label>Amount: </label><input type="text" id="amount<%=id%>" <%=JSPHelper.pickString(customer.getAmount()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div> 
+		<div class="form-group"><label>Social Security Number: </label><input type="text" id="ssn<%=id%>" <%=JSPHelper.pickString(customer.getSsn()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Gender: </label><input type="text" id="gender<%=id%>" <%=JSPHelper.pickString(customer.getGender()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>City: </label><input type="text" id="city<%=id%>" <%=JSPHelper.pickString(customer.getCity()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>
+		<div class="form-group"><label>Company: </label><input type="text" id="company<%=id%>" <%=JSPHelper.pickString(customer.getCompany()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Salaried? </label><input type="text" id="salaried<%=id%>" value="<%=customer.isSalaried() %>" class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>
+		<div class="form-group"><label>Salary: </label><input type="text" id="salary<%=id%>" <%=JSPHelper.pickString(customer.getSalary()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Salary Account: </label><input type="text" id="salaryacc<%=id%>" <%=JSPHelper.pickString(customer.getSalaryAccount()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Date Company Was Joined: </label><input type="date" id="joindate<%=id%>" <%=JSPHelper.pickString(customer.getCompanyJoinDate()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Years of Working Experience: </label><input type="text" id="experience<%=id%>" <%=JSPHelper.pickString(customer.getAmountOfExperience()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>How long they have been located in the area: </label><input type="text" id="located<%=id%>" <%=JSPHelper.pickString(customer.getTimeInArea()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>When they last moved: </label><input type="date" id="lastmoved<%=id%>" <%=JSPHelper.pickString(customer.getLastmove()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Home Details: </label><input type="text" id="homedetails<%=id%>" <%=JSPHelper.pickString(customer.getHomedetails()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Date Of Birth: </label><input type="date" id="dob<%=id%>"  <%=JSPHelper.pickString(customer.getDob()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Loan Details: </label><input type="text" id="loandetails<%=id%>" <%=JSPHelper.pickString(customer.getLoanDetails()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Amount of EMIs: </label><input type="text" id="emis<%=id%>" <%=JSPHelper.pickString(customer.getEmiCount()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<div class="form-group"><label>Email: </label><input type="text" id="email<%=id%>" <%=JSPHelper.pickString(customer.getEmail()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
 		<button type="button" id="save<%=id%>" class="save" value="<%=id%>">Save</button>
 		</form>	
 		<br />

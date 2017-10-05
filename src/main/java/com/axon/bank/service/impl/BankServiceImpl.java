@@ -63,7 +63,7 @@ public class BankServiceImpl implements BankService {
 			AgentCustomerEntity ace = new AgentCustomerEntity();
 			ace.setAgent(123);
 			ace.setCustomerId(id);
-			ace.setStatus(6/22);
+			ace.setStatus((double)6/21);
 			bankDao.addAgentCustomerRelation(ace);
 		}
 	}
@@ -107,8 +107,60 @@ public class BankServiceImpl implements BankService {
 		CustomerEntity customerEntity = new CustomerEntity();
 		BeanUtils.copyProperties(customerForm, customerEntity);
 		bankDao.updateCustomer(customerEntity);
+		updateStatus(customerEntity);
 	}
 	
+	private void updateStatus(CustomerEntity customerEntity) {
+		int status = 0;
+		status += checkFilled(customerEntity.getAddress());
+		status += checkFilled(customerEntity.getAge());
+		status += checkFilled(customerEntity.getAmount());
+		status += checkFilled(customerEntity.getAmountOfExperience());
+		status += checkFilled(customerEntity.getTimeInArea());
+		status += checkFilled(customerEntity.getCity());
+		status += checkFilled(customerEntity.getCompany());
+		status += checkFilled(customerEntity.getCompanyJoinDate());
+		status += checkFilled(customerEntity.getEmail());
+		status += checkFilled(customerEntity.getDob());
+		status += checkFilled(customerEntity.getGender());
+		status += checkFilled(customerEntity.getEmiCount());
+		status += checkFilled(customerEntity.getHomedetails());
+		status += checkFilled(customerEntity.getLastmove());
+		status += checkFilled(customerEntity.getLoanDetails());
+		status += checkFilled(customerEntity.getSsn());
+		status += checkFilled(customerEntity.getSalaryAccount());
+		status += checkFilled(customerEntity.getSalary())*2;
+		status += checkFilled(customerEntity.getName());
+		status += checkFilled(customerEntity.getMobile());
+		double setStatus = (double)status/(double)21;
+		bankDao.setStatus(setStatus,customerEntity.getId());
+		
+	}
+	
+	private int checkFilled(Object o) {
+		if(o == null){
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+	
+	private int checkFilled(String o) {
+		if(o == null || o.trim() == ""){
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+	
+	private int checkFilled(long l) {
+		if(l == -1){
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
 	public List<LoginForm> getConnectedAgent() {
 		List<LoginEntity> agentEntities = bankDao.getConnectedAgent();
 		List<LoginForm> agentForms = new ArrayList<LoginForm>();

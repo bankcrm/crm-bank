@@ -1,7 +1,10 @@
 package axon.email;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,6 +51,7 @@ public class ReadAndSend {
 			String emailId = "";
 			String locationName = "";
 			for(String email:emails){
+				if(email.trim() != ""){
 	               final String username = "testsynergisticit@gmail.com";
 	               final String password = "qwer12345";
 
@@ -73,12 +77,24 @@ public class ReadAndSend {
 	                               InternetAddress.parse(email));
 	                       message.setSubject("Interesting Offer For You");
 	                       //message.setText();
-	                       message.setContent("<!DOCTYPE html>"
+	                       /*message.setContent("<!DOCTYPE html>"
 		                       		+ "<html>"
 		                       		+ "<body>"
 		                       		+ "Are you interested in a bank loan? <br/>"
-		                               + "<a href=\"http://localhost:8080/crm-bank/form.html\">Click here!</a>"
-		                               + "</body></html>", "text/html");
+		                               + "<a href=\"http://localhost:8080/crm-bank/uploadApplicant.jsp">Click here!</a>"
+		                               + "</body></html>", "text/html");*/
+	                       
+	                    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/webapp/uploadApplicant.html")))){
+	                    	   String read;
+	                    	   String all = "";
+	                    	   while((read = reader.readLine()) != null){
+	                    		   all += read;
+	                    	   }
+	                    	   message.setContent(all,"text/html");
+	                       } catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
 	                       Transport.send(message);
 
@@ -88,7 +104,7 @@ public class ReadAndSend {
 	                       throw new RuntimeException(e);
 	               }
 			}
-		
+		}
 	}
 	
 	

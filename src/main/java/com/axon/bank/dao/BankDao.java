@@ -21,5 +21,6 @@ public interface BankDao {
 	public void updateCustomer(CustomerEntity customerEntity);
 	public List<LoginEntity> getConnectedAgent();
 	public List<CustomerEntity> getAcceptedApplicants();
+	public void setStatus(double setStatus, int cid);
 
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Upload Information Page</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="bs-example" style="margin-left: 30px;">
+		<form id="loanform" action="bank/uploadApplicant" method="post" class="form-horizontal">
+			<table>
+				<tr>
+					<td>
+						<div class="form-group">
+							<label>Name : </label> <input type="text" class="form-control"
+								id="name" name="name" placeholder="name"
+								style="width: 300px; display: inline; margin-left: 40px;" /> <br />
+						</div>
+						<div class="form-group">
+							<label>Age :</label> <input type="text" class="form-control"
+								id="age" name="age" placeholder="age"
+								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
+							<br />
+						</div>
+
+						<div class="form-group">
+							<label>Address :</label> <input type="text" class="form-control"
+								id="address" name="address" placeholder="address"
+								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
+							<br />
+						</div>
+						<div class="form-group">
+							<label>Mobile :</label> <input type="text" class="form-control"
+								id="mobile" name="mobile" placeholder="mobile"
+								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
+							<br />
+						</div>
+
+						<div class="form-group">
+							<label>Amount :</label> <input type="text" class="form-control"
+								id="amount" name="amount" placeholder="amount"
+								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
+							<br />
+						</div>
+
+						<div class="form-group">
+							<label>SSN :</label> <input type="text" class="form-control"
+								id="ssn" name="ssn" placeholder="ssn"
+								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
+							<br />
+						</div>
+						<button type="submit" class="btn btn-danger"
+							style="display: inline; margin-right: 40px;" id="upload">Create
+							Profile</button>
+
+					</td>
+
+				</tr>
+
+			</table>
+		</form>
+		<br />
+		<br />
+	</div>
+</body>
+
+</html>

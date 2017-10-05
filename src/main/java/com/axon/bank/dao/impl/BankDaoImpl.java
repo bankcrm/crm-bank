@@ -168,4 +168,15 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		super.getHibernateTemplate().merge(customerEntity);
 	}
 
+	@Override
+	public void setStatus(double setStatus, int cid) {
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where customerId = ?", cid);
+		AgentCustomerEntity relation = relations.get(0);
+		relation.setStatus(setStatus);
+		System.out.println(relation);
+		System.out.println(setStatus);
+		super.getHibernateTemplate().merge(relation);
+		
+	}
+
 }

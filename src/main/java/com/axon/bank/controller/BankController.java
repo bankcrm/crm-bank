@@ -72,6 +72,7 @@ public class BankController {
 			System.out.println(customer.toString());
 			model.addAttribute(customer.toString());
 		}
+		model.addAttribute("username",auth.getName());
 		model.addAttribute("customers", customers);
 		return "agentHome";
 	}

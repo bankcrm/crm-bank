@@ -24,4 +24,25 @@ public class JSPHelper {
 		}
 		return "value=\""+ d.toString().substring(0,10) + "\"";
 	}
+	
+	public static String pickColor(){
+		String s = "";
+		//for(int i = 0; i < 2; i++){
+			int hex = 0xC0;
+			s += (Integer.toHexString((int) (hex + Math.random()*0x40))); 
+		//}
+		s += "EEFF";
+		System.out.println(s);
+		return s;
+	}
+	
+	public static String pickColor(String str){
+		String s = "";
+		for(int i = 0; i < 3; i++){
+			int hex = 0xA0;
+			s += (Integer.toHexString((int) (hex + str.hashCode()%0x60))); 
+		}
+		System.out.println(s);
+		return s;
+	}
 }
