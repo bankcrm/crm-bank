@@ -58,6 +58,7 @@ public class BankServiceImpl implements BankService {
 			ApplicantEntity applicant = bankDao.getLoanApplicant(id);
 			CustomerEntity customer = new CustomerEntity();
 			BeanUtils.copyProperties(applicant, customer);
+			setUpCustomer(customer);
 			bankDao.makeCustomer(customer);
 			AgentCustomerEntity ace = new AgentCustomerEntity();
 			ace.setAgent(123);
@@ -65,6 +66,13 @@ public class BankServiceImpl implements BankService {
 			ace.setStatus(6/22);
 			bankDao.addAgentCustomerRelation(ace);
 		}
+	}
+
+	private void setUpCustomer(CustomerEntity customer) {
+		customer.setAmountOfExperience(-1);
+		customer.setEmiCount(-1);
+		customer.setSalary(-1);
+		customer.setTimeInArea(-1);		
 	}
 
 	@Override
@@ -95,6 +103,7 @@ public class BankServiceImpl implements BankService {
 
 	@Override
 	public void updateCustomer(CustomerForm customerForm) {
+		customerForm.setDob(customerForm.getDob());
 		CustomerEntity customerEntity = new CustomerEntity();
 		BeanUtils.copyProperties(customerForm, customerEntity);
 		bankDao.updateCustomer(customerEntity);
