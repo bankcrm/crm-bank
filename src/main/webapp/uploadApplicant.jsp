@@ -82,7 +82,7 @@ $(document).ready(function(){
 		console.log("validation start");
 		if($("#name").val() == ""){
 			alert("A name must be given.");
-		} else if ($("#age").val() < 1 || isNan($("#amount").val())){
+		} else if ($("#age").val() < 1 || isNaN($("#age").val())){
 			alert("Age can not be a negative number!");
 		} else if ($("#address").val() == ""){
 			alert("Address must be inserted.");

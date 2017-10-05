@@ -1,6 +1,7 @@
 package com.axon.bank.controller;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -101,7 +102,8 @@ public class BankController {
 			consumes={"application/json", "application/xml"},
 			produces={"application/json", "application/xml"})
 	@ResponseBody
-	public AppMessageResponse changeStatus(@RequestBody CustomerForm customer){
+	public AppMessageResponse updateCustomer(@RequestBody CustomerForm customer){
+	TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 	System.out.println("Updating: " + customer);
 	bankService.updateCustomer(customer);
 	AppMessageResponse appMessageResponse = new AppMessageResponse();
