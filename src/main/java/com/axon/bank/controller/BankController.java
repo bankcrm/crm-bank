@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,5 +128,14 @@ public class BankController {
 		return applicantList;
 	}
 	
+	@RequestMapping(value="assignedRequest/{id}/{username}", method=RequestMethod.PUT, produces="application/json")
+	@ResponseBody
+	public AppMessageResponse assginCustomerRequest(@PathVariable("id") int id, @PathVariable("username") String username){
+		bankService.setAgentId(id, username);
+		AppMessageResponse appMessageResponse = new AppMessageResponse();
+		appMessageResponse.setStatus("success");
+		appMessageResponse.setMessage("Request Assigned");
+		return appMessageResponse;
+	}
 
 }

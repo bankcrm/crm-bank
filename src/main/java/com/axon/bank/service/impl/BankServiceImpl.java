@@ -184,4 +184,10 @@ public class BankServiceImpl implements BankService {
 		return formList;
 	}
 
+	@Override
+	public String setAgentId(int id, String username) {
+		bankDao.setAgentId(id, username);
+		return "success";
+	}
+
 }

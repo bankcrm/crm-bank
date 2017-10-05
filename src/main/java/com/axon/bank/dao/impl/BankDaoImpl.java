@@ -73,10 +73,16 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		return applicantList;
 	}
 	
+	/**
+	 *  Helper method
+	 * @return
+	 */
 	public List<AgentCustomerEntity> getAgentCustomerList(){
 		List<AgentCustomerEntity> agentCustomerList = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where agent = 1");
 		return agentCustomerList;
 	}
+	
+	
 	/**
 	 * This method is for spring security
 	 */
@@ -109,7 +115,18 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		
 		
 	}
-
+	@Override
+	public String setAgentId(int id, String username){
+		
+		LoginEntity loginEntity = findRoleByUsername(username);
+		//need to get the customer id of  current row
+		 
+		List<AgentCustomerEntity> list = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where customerId =" + id );
+		AgentCustomerEntity agentCustomerEntity = list.get(0);
+		agentCustomerEntity.setAgent(loginEntity.getLid());
+		super.getHibernateTemplate().save(agentCustomerEntity);
+		return "success";
+	}
 
 	@Override
 	public String changeStatus(int id, String status) {
