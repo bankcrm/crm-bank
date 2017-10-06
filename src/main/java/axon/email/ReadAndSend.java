@@ -84,7 +84,7 @@ public class ReadAndSend {
 		                               + "<a href=\"http://localhost:8080/crm-bank/uploadApplicant.jsp">Click here!</a>"
 		                               + "</body></html>", "text/html");*/
 	                       
-	                    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/webapp/uploadApplicant.html")))){
+	                    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/webapp/uploadApplicant.")))){
 	                    	   String read;
 	                    	   String all = "";
 	                    	   while((read = reader.readLine()) != null){
