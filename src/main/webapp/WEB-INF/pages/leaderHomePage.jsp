@@ -106,6 +106,7 @@ function assign(){
 			mimeType : 'application/json',
 			success : function(assignJsonData) {			
 				console.log(assignJsonData.status);
+				Window.location.href="http://localhost:8080/crm-bank/mybank/redirectHome";
 			},
 			error : function(data, status, er) {
 				alert("error: " + data + " status: " + status + " er:" + er);
