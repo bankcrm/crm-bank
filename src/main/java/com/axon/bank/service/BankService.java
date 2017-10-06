@@ -16,4 +16,5 @@ public interface BankService {
 	public List<LoginForm> getConnectedAgent();
 	public List<CustomerForm> getAcceptedApplicants();
 	public String setAgentId(int id, String username);
+	public List<Object> getProgessStatus();
 }
