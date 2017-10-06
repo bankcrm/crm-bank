@@ -152,7 +152,7 @@ function validate(id){
 </script>
 </head>
 <body>
-
+<a href="${pageContext.request.contextPath}/mybank/logout">logout</a><br/>
 <div style="background-color:#<%=JSPHelper.pickColor((String)request.getAttribute("username"))%>">
 <br>
 <center><h1> Hello <%= request.getAttribute("username") %>!</h1></center>
