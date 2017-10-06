@@ -114,7 +114,7 @@ public class BankController {
 	}
 
 
-	@RequestMapping(value="leaderHome", method=RequestMethod.GET, produces= {"application/json"})
+	@RequestMapping(value="/leaderHome", method=RequestMethod.GET, produces= {"application/json"})
 	@ResponseBody
 	public List<LoginForm> getConnectedAgent(){
 		List<LoginForm> agentList = bankService.getConnectedAgent();
@@ -126,6 +126,13 @@ public class BankController {
 	public List<CustomerForm> getAcceptedApplicants(){
 		List<CustomerForm> applicantList = bankService.getAcceptedApplicants();
 		return applicantList;
+	}
+	
+	@RequestMapping(value="/progressStatus", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public List<Object> getProgressList(){
+		System.out.println("$$$$$$%%%%%%%%@@@@@@_____");
+		return bankService.getProgessStatus();
 	}
 	
 	@RequestMapping(value="assignedRequest/{id}/{username}", method=RequestMethod.PUT, produces="application/json")

@@ -190,4 +190,10 @@ public class BankServiceImpl implements BankService {
 		return "success";
 	}
 
+	@Override
+	public List<Object> getProgessStatus() {
+		
+		return bankDao.getProgessStatus();
+	}
+
 }

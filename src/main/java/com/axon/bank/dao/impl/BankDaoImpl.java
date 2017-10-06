@@ -129,6 +129,11 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 	}
 
 	@Override
+	public List<Object> getProgessStatus(){
+		List<Object> list = (List<Object>) super.getHibernateTemplate().find("select login.username, customer.name, agentCustomer.status from LoginEntity as login, CustomerEntity as customer, AgentCustomerEntity as agentCustomer where login.lid = agent and customer.id = agentCustomer.customerId and login.id>1");
+		return list;
+	}
+	@Override
 	public String changeStatus(int id, String status) {
 		List<ApplicantEntity> apps = (List<ApplicantEntity>) super.getHibernateTemplate().find("from ApplicantEntity where id=?", id);
 		ApplicantEntity applicant = apps.get(0);
