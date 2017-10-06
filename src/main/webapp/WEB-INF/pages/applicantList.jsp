@@ -1,3 +1,4 @@
+<%@ page import="com.axon.util.JSPHelper" %>
 <%@ page import="com.axon.bank.form.ApplicantForm" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -74,20 +75,23 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/mybank/logout">logout</a><br/>
 
+<center><h1>Currently Pending Loan Applications</h1></center> <br>
 <% ArrayList<ApplicantForm> applicants = (ArrayList<ApplicantForm>) request.getAttribute("applicants"); 
 	int id;
 	for(ApplicantForm applicant : applicants){
 		id = applicant.getId();%>
-		<div id="Header<%=id%>"><h2> Request #<%=id%>  <a href="javascript:expand('<%=id%>');">+</a><a href="javascript:unexpand('<%=id%>');">-</a></h2>
+		<center><div id="Header<%=id%>" style="background-color:#<%=JSPHelper.pickColor()%>">
+		<h2> Request #<%=id%><button onClick="javascript:expand('<%=id%>');"> + </button>     <button onClick="javascript:unexpand('<%=id%>');">  -  </button></h2></div></center>
 		<div id="Req<%=id%>" style="display:none"> 
-		Customer Name: <%=applicant.getName() %><br>
-		Age: <%=applicant.getAge() %><br>
-		Address: <%=applicant.getAddress() %><br>   
-		Mobile: <%=applicant.getMobile() %><br> 
-		Amount: <%=applicant.getAmount() %><br> 
-		Social Security Number: <%=applicant.getSsn() %><br>
-		Time Submitted: <%=applicant.getStatus() %><br>
+		<label> Customer Name: </label> <%=applicant.getName() %><br>
+		<label> Age: </label> <%=applicant.getAge() %><br>
+		<label> Address: </label> <%=applicant.getAddress() %><br>   
+		<label> Mobile: </label> <%=applicant.getMobile() %><br> 
+		<label> Amount: </label> <%=applicant.getAmount() %><br> 
+		<label> Social Security Number: </label> <%=applicant.getSsn() %><br>
+		<label> Time Submitted: </label> <%=applicant.getDateCreated() %><br>
 		<button id="accept<%=id%>" class="accept" value="<%=id%>">Accept</button> <button id="reject<%=id%>" class="decline" value="<%=id%>">Decline</button>
 		<br />
 		</div>
