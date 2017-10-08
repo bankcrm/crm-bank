@@ -67,8 +67,10 @@ public class BankController {
 	@RequestMapping(value="agentcustomers", method=RequestMethod.GET)
 	public String printCustomers(Model model){
 		System.out.println("Gets an Agent's Customers");
+		bankService.assignCustoemerToAgent();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();;
 		List<CustomerForm> customers = bankService.selectAgentsCustomers(auth.getName());
+		
 		for(CustomerForm customer : customers){
 			System.out.println(customer.toString());
 			model.addAttribute(customer.toString());
@@ -121,7 +123,7 @@ public class BankController {
 		return agentList;
 	}
 	
-	@RequestMapping(value="acceptedRequest", method=RequestMethod.GET, produces= {"application/json"})
+	@RequestMapping(value="/acceptedRequest", method=RequestMethod.GET, produces= {"application/json"})
 	@ResponseBody
 	public List<CustomerForm> getAcceptedApplicants(){
 		List<CustomerForm> applicantList = bankService.getAcceptedApplicants();
@@ -135,10 +137,20 @@ public class BankController {
 		return bankService.getProgessStatus();
 	}
 	
-	@RequestMapping(value="assignedRequest/{id}/{username}", method=RequestMethod.PUT, produces="application/json")
+	@RequestMapping(value="/assignedRequest/{id}/{username}", method=RequestMethod.PUT, produces="application/json")
 	@ResponseBody
 	public AppMessageResponse assginCustomerRequest(@PathVariable("id") int id, @PathVariable("username") String username){
-		bankService.setAgentId(id, username);
+		bankService.assignCustoemerToAgent(id, username);
+		AppMessageResponse appMessageResponse = new AppMessageResponse();
+		appMessageResponse.setStatus("success");
+		appMessageResponse.setMessage("Request Assigned");
+		return appMessageResponse;
+	}
+	
+	@RequestMapping(value="/autoAssignRequest", method=RequestMethod.PUT, produces="application/json")
+	@ResponseBody
+	public AppMessageResponse autoAssignCustomerRequest(){
+		bankService.assignCustoemerToAgent();
 		AppMessageResponse appMessageResponse = new AppMessageResponse();
 		appMessageResponse.setStatus("success");
 		appMessageResponse.setMessage("Request Assigned");

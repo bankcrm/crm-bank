@@ -51,6 +51,7 @@ public class BankServiceImpl implements BankService {
 
 	}
 
+	//Creating customer
 	@Override
 	public void changeStatus(int id, String status) {
 		bankDao.changeStatus(id, status);
@@ -63,7 +64,7 @@ public class BankServiceImpl implements BankService {
 			AgentCustomerEntity ace = new AgentCustomerEntity();
 			ace.setAgent(1);
 			ace.setCustomerId(id);
-			ace.setStatus((double)6/21);
+			ace.setStatus((double)6 * 100 /21);
 			bankDao.addAgentCustomerRelation(ace);
 		}
 	}
@@ -132,7 +133,7 @@ public class BankServiceImpl implements BankService {
 		status += checkFilled(customerEntity.getSalary())*2;
 		status += checkFilled(customerEntity.getName());
 		status += checkFilled(customerEntity.getMobile());
-		double setStatus = (double)status/(double)21;
+		double setStatus = (double) status/(double)21;
 		bankDao.setStatus(setStatus,customerEntity.getId());
 		
 	}
@@ -185,15 +186,20 @@ public class BankServiceImpl implements BankService {
 	}
 
 	@Override
-	public String setAgentId(int id, String username) {
-		bankDao.setAgentId(id, username);
+	public String assignCustoemerToAgent(int id, String username) {
+		bankDao.assignCustoemerToAgent(id, username);
 		return "success";
 	}
 
+	
 	@Override
 	public List<Object> getProgessStatus() {
-		
 		return bankDao.getProgessStatus();
+	}
+
+	@Override
+	public String assignCustoemerToAgent() {
+		return bankDao.assignCustoemerToAgent();
 	}
 
 }
