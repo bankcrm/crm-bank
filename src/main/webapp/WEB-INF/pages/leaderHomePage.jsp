@@ -39,6 +39,7 @@ $(document).ready(function(){
 	$("#img1").on('click', function(){
 		$("#progressTable").hide();
 		$("#applicantTable").hide();
+		$("#agentTable").show();
 		agentContents="";
 		//console.log(jsonData);
 		agentContents = agentContents + "<thead>";
@@ -88,8 +89,8 @@ $(document).ready(function(){
 	$("#img2").on('click', function(){
 		$("#agentTable").hide();
 		$("#progressTable").hide();
+		$("#applicantTable").show();
 		applicantContents="";
-		//console.log(newJsonData);
 		applicantContents = applicantContents + '<thead>';
 		applicantContents = applicantContents + '<tr>';
 		applicantContents = applicantContents + '<th>Customer Id</th>';
@@ -173,6 +174,7 @@ $(document).ready(function(){
 	$("#img3").on('click', function(){
 		$("#agentTable").hide();
 		$("#applicantTable").hide();
+		$("#progressTable").show();
 		progressContents="";
 		//console.log(progressData);
 		//console.log(progressData[0]);
@@ -228,21 +230,22 @@ function addprogressResult(row){
     <div class="col-sm-4">
       <div class="panel panel-success">
         <div class="panel-heading">Connected Agents</div>
-        <div class="panel-body"><img id = "img1" alt="" src="https://placehold.it/150x80?text=MyImage" class="img-responsive" style="width:100%"></div>
+       
+        <div class="panel-body"><img id = "img1" alt="myImage" src="${pageContext.request.contextPath}/img/user.png" class="img-responsive" style="width:100%"></div>
         <div class="panel-footer">All the connected Agents are here</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
         <div class="panel-heading">Accepted Request</div>
-        <div class="panel-body"><img id="img2" src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img id="img2" src="${pageContext.request.contextPath}/img/user.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">All the accepted request are here</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-primary">
         <div class="panel-heading">Progress</div>
-        <div class="panel-body"><img id="img3" src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img id="img3" src="${pageContext.request.contextPath}/img/user.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">All the progress are here</div>
       </div>
     </div>
