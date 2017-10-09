@@ -11,6 +11,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 <script type="text/javascript">
+
 $(document).ready(function(){
 	
 	 function sendAjax() {
@@ -138,68 +139,132 @@ $(document).ready(function(){
 </script>
 
 <style type="text/css">
-.bs-example {
-	margin: 20px;
-}
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
 </style>
 </head>
 <body>
-	<div class="bs-example" style="margin-left: 30px;">
+<nav class="navbar navbar-inverse" style="margin-bottom:50px; border-radius:0;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active" ><a href="#">Home</a></li>
+        <li><a href="#" >About</a></li>
+   
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="${pageContext.request.contextPath}/mybank/auth"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+	
+	<div class="container text-center">   
+  <div class="row">
+<div id="myCarousel" class="carousel slide col-sm-7" data-ride="carousel" >
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
+        <div class="carousel-caption">
+          <h3>Borrow </h3>
+          <p>Money Money.</p>
+        </div>      
+      </div>
+
+      <div class="item">
+        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+        <div class="carousel-caption">
+          <h3>More loan $</h3>
+          <p>loan loan...</p>
+        </div>      
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+
+	<div class="col-sm-5" style="margin-left:30px; width:30%">
 		<form id="loanform" action="bank/uploadApplicant" method="post" class="form-horizontal">
-			<table>
-				<tr>
-					<td>
-						<div class="form-group">
-							<label>Name : </label> <input type="text" class="form-control"
-								id="name" name="name" placeholder="name"
-								style="width: 300px; display: inline; margin-left: 40px;" /> <br />
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="name">Name:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
 						</div>
-						<div class="form-group">
-							<label>Age :</label> <input type="text" class="form-control"
-								id="age" name="age" placeholder="age"
-								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
-							<br />
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="age">Age:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="age" name="age" placeholder="Enter your age">
 						</div>
-
-						<div class="form-group">
-							<label>Address :</label> <input type="text" class="form-control"
-								id="address" name="address" placeholder="address"
-								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
-							<br />
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="address">Address:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="address" name="address" placeholder="Enter your address">
 						</div>
-						<div class="form-group">
-							<label>Mobile :</label> <input type="text" class="form-control"
-								id="mobile" name="mobile" placeholder="mobile"
-								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
-							<br />
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="mobile">Mobile:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile">
 						</div>
-
-						<div class="form-group">
-							<label>Amount :</label> <input type="text" class="form-control"
-								id="amount" name="amount" placeholder="amount"
-								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
-							<br />
+					</div>
+				
+				<div class="form-group">
+						<label class="control-label col-sm-2" for="amount">Amount:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="amount" name="amount" placeholder="Enter your loan amount">
 						</div>
-
-						<div class="form-group">
-							<label>SSN :</label> <input type="text" class="form-control"
-								id="ssn" name="ssn" placeholder="ssn"
-								style="margin-left: 40px; width: 400px; display: inline; margin-right: 40px;" />
-							<br />
+					</div>
+				
+				<div class="form-group">
+						<label class="control-label col-sm-2" for="ssn">SSN:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="ssn" name="ssn" placeholder="Enter your ssn">
 						</div>
-						<button type="button" class="btn btn-danger"
-							style="display: inline; margin-right: 40px;" id="upload">Create
-							Profile</button>
+				</div>
 
-					</td>
-
-				</tr>
-
-			</table>
+		<button type="button" class="btn btn-primary" style="display: inline; margin-right: 40px;" id="upload">Apply Loan</button>
 		</form>
-		<br />
-		<br />
+		<br>
 	</div>
+	  </div>
+  </div>
+  <footer class="footer" style="position: fixed; bottom: 0; left:0;">
+      <div class="container">
+        <p class="text-muted container-fluid text-center" >@Copyright CRM BANK</p>
+      </div>
+  </footer>
+	
 </body>
 
 </html>

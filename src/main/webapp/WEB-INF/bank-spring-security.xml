@@ -12,7 +12,7 @@
 	<security:intercept-url pattern="/mybank/auth" access="permitAll"/>
 	<security:intercept-url pattern="/mybank/invalidLogin" access="permitAll"/>
 	<security:intercept-url pattern="/mybank/sessionTimeoutPage" access="permitAll"/>
-	
+	<security:intercept-url pattern="/img/**" access="permitAll"/>
 	<security:intercept-url pattern="/bank/**" access="permitAll"/>
 	 	
 		 <security:intercept-url pattern="/mybank/**" access="hasAnyRole('admin','agent','team leader')"/> 

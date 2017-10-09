@@ -98,6 +98,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<img alt="" src="user.png">
 	<span style="color: red; font-size: 16px;">${message}</span>
 	<div class="bs-example" style="margin-left: 30px;">
 		<form  class="form-horizontal">
