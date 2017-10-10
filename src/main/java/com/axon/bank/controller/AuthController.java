@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -43,7 +44,7 @@ public class AuthController {
 	}
 	@RequestMapping(value="invalidLogin", method=RequestMethod.GET)
 	public String invalidLogin(Model model){
-		model.addAttribute("message", "Your login info is not correct");
+		model.addAttribute("message","Your login info is not correct");
 		return "login";
 	}
 	
@@ -86,12 +87,13 @@ public class AuthController {
 	}
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();;
+		System.out.println("%%%%%%%%%%%_____auth name " +auth.getName());
+		String result = authService.setLogoutStatus(auth.getName());
+		System.out.println("Log out " + result);
 		if(session!=null){
-			System.out.println("logout______@@@@@@@@@@@");
-			session.invalidate();
-			
-		}
-		
+			session.invalidate();			
+		}		
 		return "redirect:/index.jsp";
 	}
 }

@@ -37,6 +37,7 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <label >Useranme</label>
         <input type="text"  class="form-control" placeholder="Username" name="j_username" required autofocus>
+ 
         <label >Password</label>
         <input type="password" class="form-control" placeholder="Password" name="j_password" required style="margin-bottom:30px">
  

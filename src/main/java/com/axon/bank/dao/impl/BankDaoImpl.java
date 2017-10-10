@@ -151,6 +151,11 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		return "success";
 	}
 
+	/**Helper method
+	 * 
+	 * @param username
+	 * @return
+	 */
 	public LoginEntity findAgentByUserName(String username){
 		LoginEntity loginEntity = null;
 		List<LoginEntity> entitiesList = (List<LoginEntity>) super.getHibernateTemplate().find("from LoginEntity where role='agent' and status = 1 and username = ?", username);
@@ -184,6 +189,9 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		}
 		return assigned;
 	}
+	/**Helper method for assignCustoemerToAgent()
+	 * 
+	 */
 	public List<String> findNotWorkingAgents(){
 		
 		List<String> agentNameList = null;
@@ -193,13 +201,24 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		return agentNameList;
 	}
 	
+	/**
+	 * Helper method for assignCustoemerToAgent()
+	 * 
+	 */
 	public List<Integer> findNotAssignCustomers(){
 		List<Integer> customerList = (List<Integer>) super.getHibernateTemplate().find("select relationEntity.customerId from AgentCustomerEntity as relationEntity where agent = 1");
 		System.out.println("----------*************&&&&&&&&&&______finding not assign customers");
 		System.out.println(customerList);
 		return customerList;
 	}
-	
+	@Override
+	public String setLogoutStatus(String username){
+		List<LoginEntity> loginEntityList = (List<LoginEntity>) super.getHibernateTemplate().find("from LoginEntity where username=?",  username);
+		LoginEntity loginEntity = loginEntityList.get(0);
+		loginEntity.setStatus(0);
+		super.getHibernateTemplate().save(loginEntity);
+		return "success";
+	}
 	/**
 	 * This method is for return the progress status of the customer form
 	 * @return 

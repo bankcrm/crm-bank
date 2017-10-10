@@ -23,4 +23,12 @@ public class AuthServiceImpl implements AuthService{
 		return bankDao.authUser(username, password);
 	}
 
+	@Override
+	public String setLogoutStatus(String username) {
+		
+		return bankDao.setLogoutStatus(username);
+	}
+	
+	
+
 }

@@ -27,5 +27,6 @@ public interface BankDao {
 	public String assignCustoemerToAgent();
 	public double isCompleted(int id);
 	public CustomerEntity getCustomer(int id);
+	public String setLogoutStatus(String username);
 
 }
