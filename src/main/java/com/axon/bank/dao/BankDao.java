@@ -25,5 +25,6 @@ public interface BankDao {
 	public String assignCustoemerToAgent(int id, String username);
 	public List<Object> getProgessStatus();
 	public String assignCustoemerToAgent();
+	public String setLogoutStatus(String username);
 
 }

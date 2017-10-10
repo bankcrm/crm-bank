@@ -21,4 +21,5 @@ public interface BankService {
 	public String assignCustoemerToAgent(int id, String username);
 	public List<Object> getProgessStatus();
 	public String assignCustoemerToAgent();
+	
 }
