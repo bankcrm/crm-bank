@@ -59,7 +59,15 @@ public class CustomerEntity {
 	int emiCount;
 	@Column(length=255)
 	String email;
+	@Column
+	boolean document;
 	
+	public boolean isDocument() {
+		return document;
+	}
+	public void setDocument(boolean document) {
+		this.document = document;
+	}
 	public int getId() {
 		return id;
 	}
@@ -206,7 +214,7 @@ public class CustomerEntity {
 				+ ", salaryAccount=" + salaryAccount + ", companyJoinDate=" + companyJoinDate + ", amountOfExperience="
 				+ amountOfExperience + ", timeInArea=" + timeInArea + ", lastmove=" + lastmove + ", homedetails="
 				+ homedetails + ", dob=" + dob + ", loanDetails=" + loanDetails + ", emiCount=" + emiCount + ", email="
-				+ email + "]";
+				+ email + ", document=" + document + "]";
 	}
 	
 }

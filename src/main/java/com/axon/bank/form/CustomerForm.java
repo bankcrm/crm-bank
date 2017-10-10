@@ -59,6 +59,14 @@ public class CustomerForm {
 	
 	String email;
 	
+	boolean document;
+	
+	public boolean isDocument() {
+		return document;
+	}
+	public void setDocument(boolean document) {
+		this.document = document;
+	}
 	public int getId() {
 		return id;
 	}
@@ -199,13 +207,13 @@ public class CustomerForm {
 	}
 	@Override
 	public String toString() {
-		return "CustomerEntity [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", mobile="
+		return "CustomerForm [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", mobile="
 				+ mobile + ", amount=" + amount + ", ssn=" + ssn + ", dateCreated=" + dateCreated + ", gender=" + gender
 				+ ", city=" + city + ", company=" + company + ", salaried=" + salaried + ", salary=" + salary
 				+ ", salaryAccount=" + salaryAccount + ", companyJoinDate=" + companyJoinDate + ", amountOfExperience="
 				+ amountOfExperience + ", timeInArea=" + timeInArea + ", lastmove=" + lastmove + ", homedetails="
 				+ homedetails + ", dob=" + dob + ", loanDetails=" + loanDetails + ", emiCount=" + emiCount + ", email="
-				+ email + "]";
+				+ email + ", document=" + document + "]";
 	}
 	
 }

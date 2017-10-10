@@ -25,5 +25,7 @@ public interface BankDao {
 	public String assignCustoemerToAgent(int id, String username);
 	public List<Object> getProgessStatus();
 	public String assignCustoemerToAgent();
+	public double isCompleted(int id);
+	public CustomerEntity getCustomer(int id);
 
 }

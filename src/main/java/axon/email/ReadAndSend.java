@@ -77,14 +77,11 @@ public class ReadAndSend {
 	                               InternetAddress.parse(email));
 	                       message.setSubject("Interesting Offer For You");
 	                       //message.setText();
-	                       /*message.setContent("<!DOCTYPE html>"
-		                       		+ "<html>"
-		                       		+ "<body>"
-		                       		+ "Are you interested in a bank loan? <br/>"
-		                               + "<a href=\"http://localhost:8080/crm-bank/uploadApplicant.jsp">Click here!</a>"
-		                               + "</body></html>", "text/html");*/
+	                       message.setContent("<!DOCTYPE html>" + "<html>" + "<body>" + "Are you interested in a bank loan? <br/>"
+		                               + "<a href=\"http://localhost:8080/crm-bank/uploadApplicant.jsp\">Click here!</a>"
+		                               + "</body></html>", "text/html");
 	                       
-	                    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/webapp/uploadApplicant.")))){
+	                    /*try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/webapp/uploadApplicant.")))){
 	                    	   String read;
 	                    	   String all = "";
 	                    	   while((read = reader.readLine()) != null){
@@ -94,7 +91,7 @@ public class ReadAndSend {
 	                       } catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						}*/
 
 	                       Transport.send(message);
 

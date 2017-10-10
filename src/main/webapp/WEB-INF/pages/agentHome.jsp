@@ -49,6 +49,7 @@ $(document).ready(function(){
 			customer.loanDetails = $("#loandetails"+id).val();
 			customer.emiCount= $("#emis"+id).val();
 			customer.email= $("#email"+id).val();
+			customer.document=$("#document"+id).val();
 			if(customer.companyJoinDate == 0){
 				customer.companyJoinDate = null;
 			}
@@ -191,9 +192,10 @@ function validate(id){
 		<div class="form-group"><label>Loan Details: </label><input type="text" id="loandetails<%=id%>" <%=JSPHelper.pickString(customer.getLoanDetails()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
 		<div class="form-group"><label>Amount of EMIs: </label><input type="text" id="emis<%=id%>" <%=JSPHelper.pickString(customer.getEmiCount()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
 		<div class="form-group"><label>Email: </label><input type="text" id="email<%=id%>" <%=JSPHelper.pickString(customer.getEmail()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
+		<input type=hidden id="document<%=id%>" value=<%=customer.isDocument() %> />
 		<button type="button" id="save<%=id%>" class="save" value="<%=id%>">Save</button>
-		<a href="uploaddocument/<%=id%>/<%=customer.getName()%>"><button type="button" id="loan<%=id%>" class="loan" value="<%=id%>">Get Loan Document</button>
-		</a>
+		<button type="button" onclick="location.href='uploaddocument/<%=id%>/<%=customer.getName()%>';" id="loan<%=id%>" class="loan" value="<%=id%>">Get Loan Document</button>
+		<button type="button" onclick="location.href='finalize/<%=id%>';" id="finialize<%=id%>" value="<%=id%>">Finallize & Approve</button>
 		</form>	
 		<br />
 		</div>

@@ -72,9 +72,7 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		List<CustomerEntity> applicantList = new ArrayList<CustomerEntity>();
 		for(AgentCustomerEntity entity : agentCustomerList){
 			System.out.println(entity.getAgent());
-			List<CustomerEntity> customer = (List<CustomerEntity>)super.getHibernateTemplate().find("from CustomerEntity where id = " + entity.getCustomerId());
-			applicantList.add(customer.get(0));
-			
+			applicantList.add(getCustomer(entity.getCustomerId()));
 		}
 		
 		return applicantList;
@@ -175,20 +173,21 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		List<String> agentList = findNotWorkingAgents();
 		List<Integer> customerList = findNotAssignCustomers();
 		
-		if(agentList.size() == 0 || customerList.size() == 0){
-			assigned = "is not assigned";
-		}else{
-			int id = customerList.get(0);
-			String username = agentList.get(0);
+		int i = 0; 
+		int k = 0;
+		while(agentList.size() > i && customerList.size() > k){
+			int id = customerList.get(k);
+			String username = agentList.get(i);
 			assignCustoemerToAgent(id, username);
 			assigned = "assigned";
+			k++; i++;
 		}
 		return assigned;
 	}
 	public List<String> findNotWorkingAgents(){
 		
 		List<String> agentNameList = null;
-		agentNameList = (List<String>) super.getHibernateTemplate().find("select login.username from LoginEntity as login where login.role ='agent' and login.status = '1' and login.lid not in (select relationEntity.agent from AgentCustomerEntity as relationEntity  where relationEntity.agent !=1 )");
+		agentNameList = (List<String>) super.getHibernateTemplate().find("select login.username from LoginEntity as login where login.role ='agent' and login.status = '1' and login.lid not in (select relationEntity.agent from AgentCustomerEntity as relationEntity where relationEntity.agent !=1 and status < 101.0)");
 		System.out.println("**&^^%% _________finding not working agents");
 		System.out.println(agentNameList);
 		return agentNameList;
@@ -255,7 +254,7 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 	@Override
 	public List<CustomerEntity> getAgentsCustomers(String name) {
 		List<LoginEntity> login = (List<LoginEntity>) super.getHibernateTemplate().find("from LoginEntity where username = ?", name);
-		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where agent = ?", login.get(0).getLid());
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where agent = ? and status < ?", login.get(0).getLid(),101.0);
 		List<CustomerEntity> customers = new ArrayList<>();
 		for(AgentCustomerEntity relation : relations){
 		 customers.addAll((List<CustomerEntity>) super.getHibernateTemplate().find("from CustomerEntity where id=?",relation.getCustomerId()));
@@ -272,13 +271,26 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 
 	@Override
 	public void setStatus(double setStatus, int cid) {
-		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where customerId = ?", cid);
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where customerId = ? ", cid);
 		AgentCustomerEntity relation = relations.get(0);
 		relation.setStatus(setStatus);
 		System.out.println(relation);
 		System.out.println(setStatus);
 		super.getHibernateTemplate().merge(relation);
 		
+	}
+
+	@Override
+	public double isCompleted(int id) {
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where customerId = ?", id);
+		AgentCustomerEntity relation = relations.get(0);
+		return relation.getStatus();
+	}
+
+	@Override
+	public CustomerEntity getCustomer(int id) {
+		List<CustomerEntity> customer = (List<CustomerEntity>)super.getHibernateTemplate().find("from CustomerEntity where id = " + id);
+		return customer.get(0);
 	}
 
 }

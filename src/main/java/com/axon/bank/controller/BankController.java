@@ -194,6 +194,17 @@ public class BankController {
              // now Spring knows how to handle multipart object and convert them
     }
 	
+	@RequestMapping(value="/finalize/{id}", method = RequestMethod.GET)
+	public String finalize(@PathVariable("id") int id, Model model){
+		if(bankService.isCompleted(id)>=100){
+			bankService.setStatus(id);
+			bankService.sendCompletedEmail(id);
+		} else {
+			
+		}
+		return "redirect:/bank/agentcustomers";
+	}
+	
 	@RequestMapping(value="/uploaddocument/{id}/{name}/upload", method = RequestMethod.POST)
 	public String create(UploadItem uploadItem, BindingResult result,
 			HttpServletRequest request, HttpServletResponse response,
@@ -241,13 +252,11 @@ public class BankController {
 			} else {
 				return "/"+name;
 			}
-
-			// ..........................................
-			session.setAttribute("uploadFile", file.getOriginalFilename());
+			bankService.setDocument(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "homePage";
+		return "redirect:/bank/agentcustomers";
 	}
 
 	
