@@ -199,10 +199,12 @@ public class BankController {
 		if(bankService.isCompleted(id)>=100){
 			bankService.setStatus(id);
 			bankService.sendCompletedEmail(id);
+			return "finalizeSuccess";
 		} else {
+			return "finalizeFailure";
 			
 		}
-		return "redirect:/bank/agentcustomers";
+
 	}
 	
 	@RequestMapping(value="/uploaddocument/{id}/{name}/upload", method = RequestMethod.POST)

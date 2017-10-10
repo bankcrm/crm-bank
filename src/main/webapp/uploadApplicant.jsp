@@ -78,6 +78,13 @@ $(document).ready(function(){
 	
 }); //end of ready function
 	function validate(){
+		$("#amount").val($("#amount").val().replace(',',''))
+		if($("#amount").val().charAt(0) == '$'){
+			$("#amount").val($("#amount").val().substring(1));
+		}
+		if($("#amount").val().charAt($("#amount").val().length-3) == '.'){
+			$("#amount").val($("#amount").val().substring(0,($("#amount").val().length-3)));
+		}
 		console.log("validation start");
 		if($("#name").val() == ""){
 			alert("A name must be given.");
