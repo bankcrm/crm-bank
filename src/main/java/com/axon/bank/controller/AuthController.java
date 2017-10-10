@@ -88,10 +88,8 @@ public class AuthController {
 	public String logout(HttpSession session){
 		if(session!=null){
 			System.out.println("logout______@@@@@@@@@@@");
-			session.invalidate();
-			
-		}
-		
+			session.invalidate();			
+		}		
 		return "redirect:/index.jsp";
 	}
 }
