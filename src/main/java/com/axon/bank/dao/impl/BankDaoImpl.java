@@ -121,6 +121,10 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 			loginEntity = null;
 		}else{
 			loginEntity = list.get(0);
+			System.out.println("@@@@@@@@____Hello, I am in the findRoleByUsername method");
+			System.out.println(loginEntity.toString());
+			loginEntity.setStatus(1);
+			super.getHibernateTemplate().save(loginEntity);
 		}
 		return loginEntity;
 		

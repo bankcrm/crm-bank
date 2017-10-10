@@ -16,7 +16,8 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        <li><a href="${pageContext.request.contextPath}/mybank/auth"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+        <li><a href="${pageContext.request.contextPath}/mybank/logout">logout</a></li>
       </ul>
     </div>
   </div>

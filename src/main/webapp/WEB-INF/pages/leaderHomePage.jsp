@@ -55,6 +55,7 @@ $(document).ready(function(){
 		}
 		agentContents = agentContents + "</tbody >";
 		$("#agentTable").html(agentContents);
+		
 	});//click event
 });
 

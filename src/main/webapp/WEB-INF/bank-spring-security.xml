@@ -15,7 +15,7 @@
 	<security:intercept-url pattern="/img/**" access="permitAll"/>
 	<security:intercept-url pattern="/bank/**" access="permitAll"/>
 	 	
-		 <security:intercept-url pattern="/mybank/**" access="hasAnyRole('admin','agent','team leader')"/> 
+		 <security:intercept-url pattern="/mybank/**" access="hasAnyRole('admin','agent','team leader','manager')"/> 
 		
 		<security:form-login login-page="/mybank/auth"
 				authentication-failure-url="/mybank/invalidLogin" 

@@ -78,6 +78,8 @@ public class AuthController {
 				nextPage="leaderHomePage";
 			} else if(role.equals("admin")){
 				nextPage="adminHomePage";
+			} else if(role.equals("manager")){
+				nextPage="redirect:/bank/viewApplicants";
 			}
 		}
 		return nextPage;
