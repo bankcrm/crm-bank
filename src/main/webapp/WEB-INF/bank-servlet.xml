@@ -23,6 +23,7 @@
 <property value="4000000" name="maxUploadSize"/>
 
 </bean>
+<mvc:resources mapping="/img/**" location="/img/"/>
 	
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<property name="prefix">

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="AgentCustomerRelation")
@@ -20,6 +21,9 @@ public class AgentCustomerEntity {
 	int customerId;
 	@Column
 	double status;
+	@Version
+	@Column
+	private Integer version = 1;
 	public int getAgent() {
 		return agent;
 	}
@@ -39,8 +43,21 @@ public class AgentCustomerEntity {
 		this.status = status;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	@Override
 	public String toString() {
-		return "AgentCustomerEntity [agent=" + agent + ", customerId=" + customerId + ", status=" + status + "]";
+		return "AgentCustomerEntity [id=" + id + ", agent=" + agent + ", customerId=" + customerId + ", status="
+				+ status + ", version=" + version + "]";
 	}
 }

@@ -56,6 +56,7 @@ public class BankServiceImpl implements BankService {
 
 	}
 
+	//Creating customer
 	@Override
 	public void changeStatus(int id, String status) {
 		bankDao.changeStatus(id, status);
@@ -68,7 +69,7 @@ public class BankServiceImpl implements BankService {
 			AgentCustomerEntity ace = new AgentCustomerEntity();
 			ace.setAgent(1);
 			ace.setCustomerId(id);
-			ace.setStatus((double)6/21);
+			ace.setStatus((double)6 * 100 /21);
 			bankDao.addAgentCustomerRelation(ace);
 		}
 	}
@@ -137,7 +138,7 @@ public class BankServiceImpl implements BankService {
 		status += checkFilled(customerEntity.getSalary())*2;
 		status += checkFilled(customerEntity.getName());
 		status += checkFilled(customerEntity.getMobile());
-		double setStatus = (double)status/(double)21;
+		double setStatus = (double) status/(double)21;
 		bankDao.setStatus(setStatus,customerEntity.getId());
 		
 	}
@@ -190,45 +191,19 @@ public class BankServiceImpl implements BankService {
 	}
 
 	@Override
-	public String setAgentId(int id, String username) {
-		bankDao.setAgentId(id, username);
+	public String assignCustoemerToAgent(int id, String username) {
+		bankDao.assignCustoemerToAgent(id, username);
 		return "success";
 	}
 
+	
 	@Override
 	public List<Object> getProgessStatus() {
 		return bankDao.getProgessStatus();
 	}
 
-	@Override
-	public void storeDocument(FileForm fileform) {
-		System.err.println("-------------------------------------------");
-		try {
-			MultipartFile file = fileform.getFile();
-			String fileName = null;
-			InputStream inputStream = null;
-			OutputStream outputStream = null;
-			if (file.getSize() > 0) {
-				inputStream = file.getInputStream();
-				System.out.println("size::" + file.getSize());
-				fileName = "filesystem/" + fileform.getId() + "/" + fileform.getName() + "/"
-						+ file.getOriginalFilename();
-				outputStream = new FileOutputStream(fileName);
-				System.out.println("fileName:" + file.getOriginalFilename());
-
-				int readBytes = 0;
-				byte[] buffer = new byte[10000];
-				while ((readBytes = inputStream.read(buffer, 0, 10000)) != -1) {
-					outputStream.write(buffer, 0, readBytes);
-				}
-				outputStream.close();
-				inputStream.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
+	public String assignCustoemerToAgent() {
+		return bankDao.assignCustoemerToAgent();
 	}
 
 }

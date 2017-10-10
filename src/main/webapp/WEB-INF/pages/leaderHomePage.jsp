@@ -11,11 +11,14 @@
 var contextPath="${pageContext.request.contextPath}";
 var agentContents ="";
 var applicantContents ="";
-var myData ="";
 var progressContents="";
+var agentData ="";
+var applicantData="";
+var progressData="";
 //var selectedName = "";
 //function that render the online agents
 $(document).ready(function(){
+	
 	var purl ="http://localhost:8080/crm-bank/bank/leaderHome";
 	$.ajax({
 			url : purl,
@@ -24,20 +27,36 @@ $(document).ready(function(){
 			contentType : 'application/json',
 			mimeType : 'application/json',
 			success : function(jsonData) {
-				agentContents="";
-				//console.log(jsonData);
+				agentData = jsonData;
 				myData = jsonData;
-				for(var i=0; i<jsonData.length; i++){
-					addAgentResult(jsonData[i]);
-				}
-				$("#agentTable").append(agentContents);
 			},
 			error : function(data, status, er) {
 				alert("error: " + data + " status: " + status + " er:" + er);
 			}
 		}
 
-		);//end of ajax call		
+		);//end of ajax call
+	$("#img1").on('click', function(){
+		$("#progressTable").hide();
+		$("#applicantTable").hide();
+		$("#agentTable").show();
+		agentContents="";
+		//console.log(jsonData);
+		agentContents = agentContents + "<thead>";
+		agentContents = agentContents + "<tr>";
+		agentContents = agentContents + "<th>Username</th>";
+		agentContents = agentContents + "<th>Role</th>";
+		agentContents = agentContents + "<th>Status</th>";
+		agentContents = agentContents + "</tr>";
+		agentContents = agentContents + "</thead>";
+		agentContents = agentContents + "<tbody >";
+		for(var i=0; i<agentData.length; i++){
+			addAgentResult(agentData[i]);
+		}
+		agentContents = agentContents + "</tbody >";
+		$("#agentTable").html(agentContents);
+		
+	});//click event
 });
 
 //Helper function for add agent result
@@ -59,13 +78,7 @@ $(document).ready(function(){
 		contentType : 'application/json',
 		mimeType : 'application/json',
 		success : function(newJsonData) {
-			applicantContents="";
-			//console.log(newJsonData);
-			for(var i=0; i<newJsonData.length; i++){
-				addApplicantResult(newJsonData[i]);
-			}
-			$("#applicantTable").append(applicantContents);
-			assign();
+			applicantData = newJsonData;
 			
 		},
 		error : function(data, status, er) {
@@ -74,10 +87,32 @@ $(document).ready(function(){
 	}
 
 	);//end of ajax call
+	$("#img2").on('click', function(){
+		$("#agentTable").hide();
+		$("#progressTable").hide();
+		$("#applicantTable").show();
+		applicantContents="";
+		applicantContents = applicantContents + '<thead>';
+		applicantContents = applicantContents + '<tr>';
+		applicantContents = applicantContents + '<th>Customer Id</th>';
+		applicantContents = applicantContents + '<th>Name</th>';
+		applicantContents = applicantContents + '<th>Amount</th>';
+		applicantContents = applicantContents + '<th>Agent Name</th>';
+		applicantContents = applicantContents + '<th>Button</th>';
+		applicantContents = applicantContents + '</tr>';
+		applicantContents = applicantContents + '</thead>';
+		applicantContents = applicantContents + '<tbody>';
+		for(var i=0; i<applicantData.length; i++){
+			addApplicantResult(applicantData[i]);
+		}
+		applicantContents = applicantContents + '</tbody>';
+		$("#applicantTable").html(applicantContents);
+		assign();
+	});// end of click event
 });
 //Helper function to add applicant result
 function addApplicantResult(row){
-	
+
 	applicantContents = applicantContents + '<tr>';
 	applicantContents = applicantContents + '<td>'+row.id+'</td>';
 	applicantContents = applicantContents + '<td>'+row.name+'</td>';
@@ -106,6 +141,7 @@ function assign(){
 			mimeType : 'application/json',
 			success : function(assignJsonData) {			
 				console.log(assignJsonData.status);
+				window.location.href="http://localhost:8080/crm-bank/mybank/redirectHome";
 			},
 			error : function(data, status, er) {
 				alert("error: " + data + " status: " + status + " er:" + er);
@@ -127,16 +163,8 @@ $(document).ready(function(){
 		dataType : 'json',
 		contentType : 'application/json',
 		mimeType : 'application/json',
-		success : function(progressData) {
-			progressContents="";
-			//console.log(progressData);
-			//console.log(progressData[0]);
-			
-			for(var i=0; i<progressData.length; i++){
-					addprogressResult(progressData[i]);
-				
-			}
-			$("#progressTable").append(progressContents);
+		success : function(pData) {
+			progressData = pData;
 		},
 		error : function(data, status, er) {
 			alert("error: " + data + " status: " + status + " er:" + er);
@@ -144,10 +172,34 @@ $(document).ready(function(){
 	}
 
 	);//end of ajax call
+	$("#img3").on('click', function(){
+		$("#agentTable").hide();
+		$("#applicantTable").hide();
+		$("#progressTable").show();
+		progressContents="";
+		//console.log(progressData);
+		//console.log(progressData[0]);
+		
+		progressContents = progressContents + '<thead>';
+		progressContents = progressContents + '<tr>';
+		progressContents = progressContents + '	<th>Agent Name</th>';
+		progressContents = progressContents + '	<th>Customer name</th>';
+		progressContents = progressContents + '	<th>Status</th>';
+		progressContents = progressContents + '</tr>';
+		progressContents = progressContents + '</thead>';
+		progressContents = progressContents + '<tbody >';
+		for(var i=0; i<progressData.length; i++){
+				addprogressResult(progressData[i]);
+			
+		}
+		progressContents = progressContents + '</tbody >';
+		$("#progressTable").html(progressContents);
+	});//end of click event
 });
 
 //Helper function to add progress result
 function addprogressResult(row){
+
 	progressContents = progressContents + '<tr>';
 	progressContents = progressContents + '<td>' + row[0] +'</td>' ;
 	progressContents = progressContents + '<td>' + row[1] +'</td>';
@@ -156,62 +208,71 @@ function addprogressResult(row){
 	
 }
 
-
-
 </script>
+<style>
+  .jumbotron {   
+      margin-bottom: 50px;
+    }
+</style>
 <title>Team Leader Home Page</title>
 </head>
 <body>
+
+<%@include file="header.jsp" %>
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Online Banking </h1>      
+    <p>Fast, Easy & Low interest</p>
+  </div>
+</div>
+
+<div class="container">    
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading">Connected Agents</div>
+       
+        <div class="panel-body"><img id = "img1" alt="myImage" src="${pageContext.request.contextPath}/img/user.png" class="img-responsive" style="width:100%"></div>
+        <div class="panel-footer">All the connected Agents are here</div>
+      </div>
+    </div>
+    <div class="col-sm-4"> 
+      <div class="panel panel-danger">
+        <div class="panel-heading">Accepted Request</div>
+        <div class="panel-body"><img id="img2" src="${pageContext.request.contextPath}/img/assign.png" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-footer">All the accepted request are here</div>
+      </div>
+    </div>
+    <div class="col-sm-4"> 
+      <div class="panel panel-primary">
+        <div class="panel-heading">Progress</div>
+        <div class="panel-body"><img id="img3" src="${pageContext.request.contextPath}/img/bar.png" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-footer">All the progress are here</div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
 <div class="container" >
-  <h2>All the connected Agents are here</h2>
-  
-<table class="table" style="width:500px" id="agentTable">
-	<thead>
-      <tr>
-      	<th>Username</th>
-      	<th>Role</th>
-      	<th>Status</th>
-     </tr>
-  	</thead>
-  	<tbody >
-  	  
-  	</tbody>
+  <table class="table" style="width:500px" id="agentTable">
+
 </table>
 </div>
 
 <div class="container" >
-  <h2>All the accepted request are here</h2>
+
   
 <table class="table" style="width:500px" id="applicantTable">
-	<thead>
-      <tr>
-      	<th>Customer Id</th>
-      	<th>Name</th>
-      	<th>Amount</th>
-      	<th>Agent Name</th>
-      	<th>Button</th>
-     </tr>
-  	</thead>
-  	<tbody>
-  	 
-  	</tbody>
+
 </table>
 </div>
 <div class="container" >
-  <h2>All the progress are here</h2>
   
 <table class="table" style="width:500px" id="progressTable">
-	<thead>
-      <tr>
-      	<th>Agent Name</th>
-      	<th>Customer name</th>
-      	<th>Status</th>
-     </tr>
-  	</thead>
-  	<tbody >
 
   	</tbody>
 </table>
 </div>
+<%@include file="footer.jsp" %>
 </body>
 </html>

@@ -11,29 +11,43 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%@include file="header.jsp" %>
 
-<h1>Hello, This is my login page</h1>
-
-<div style="margin-left: 30px;">
+<%-- 	<div style="margin-left: 30px;">
 		<form name ="loginForm" action="../j_spring_security_check" method="post">
 			<div class="form-group">
 				<label>Username........</label> 
 				<input type="text" class="form-control" name="j_username" placeholder="Username"
 					style="width: 300px;" />
 			</div>
-
 			<div class="form-group">
 				<label>Password........</label> <input type="password"
 					class="form-control" name="j_password" placeholder="password"
 					style="width: 300px;" />
 			</div>
-
 			<button type="submit" class="btn btn-danger">Login</button>
 		</form>
 		<br />
 		<br /> <span style="color: red; font-size: 16px;">${param.message}</span>
 		<label style="color: blue"></label><img alt="" src="" height="100px;">
-	</div>
+	</div> --%>
+	 <div class="container" style="width:30%">
+
+      <form class="form-signin" name ="loginForm" action="../j_spring_security_check" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label >Useranme</label>
+        <input type="text"  class="form-control" placeholder="Username" name="j_username" required autofocus>
+        <label >Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="j_password" required style="margin-bottom:30px">
+ 
+        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
 	<span style="color: red;font-size: 16px;">${message}</span>
+	<br>
+	<%@include file="footer.jsp"%>
+
 </body>
+
 </html>

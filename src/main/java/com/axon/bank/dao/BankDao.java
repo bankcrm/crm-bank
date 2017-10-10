@@ -22,7 +22,8 @@ public interface BankDao {
 	public List<LoginEntity> getConnectedAgent();
 	public List<CustomerEntity> getAcceptedApplicants();
 	public void setStatus(double setStatus, int cid);
-	public String setAgentId(int id, String username);
+	public String assignCustoemerToAgent(int id, String username);
 	public List<Object> getProgessStatus();
+	public String assignCustoemerToAgent();
 
 }
