@@ -1,5 +1,8 @@
 package com.axon.bank.service.impl;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.axon.bank.dao.BankDao;
 import com.axon.bank.dao.entity.AgentCustomerEntity;
@@ -16,6 +20,7 @@ import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.dao.entity.LoginEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.form.CustomerForm;
+import com.axon.bank.form.FileForm;
 import com.axon.bank.form.LoginForm;
 import com.axon.bank.service.BankService;
 
@@ -197,7 +202,6 @@ public class BankServiceImpl implements BankService {
 		return bankDao.getProgessStatus();
 	}
 
-	@Override
 	public String assignCustoemerToAgent() {
 		return bankDao.assignCustoemerToAgent();
 	}

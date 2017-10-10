@@ -192,6 +192,8 @@ function validate(id){
 		<div class="form-group"><label>Amount of EMIs: </label><input type="text" id="emis<%=id%>" <%=JSPHelper.pickString(customer.getEmiCount()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
 		<div class="form-group"><label>Email: </label><input type="text" id="email<%=id%>" <%=JSPHelper.pickString(customer.getEmail()) %> class="form-control" style="width: 300px; display: inline; margin-left: 40px;" /> <br /></div>	
 		<button type="button" id="save<%=id%>" class="save" value="<%=id%>">Save</button>
+		<a href="uploaddocument/<%=id%>/<%=customer.getName()%>"><button type="button" id="loan<%=id%>" class="loan" value="<%=id%>">Get Loan Document</button>
+		</a>
 		</form>	
 		<br />
 		</div>
