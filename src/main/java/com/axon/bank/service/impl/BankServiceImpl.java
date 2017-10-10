@@ -1,5 +1,8 @@
 package com.axon.bank.service.impl;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.axon.bank.dao.BankDao;
 import com.axon.bank.dao.entity.AgentCustomerEntity;
@@ -16,6 +20,7 @@ import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.dao.entity.LoginEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.form.CustomerForm;
+import com.axon.bank.form.FileForm;
 import com.axon.bank.form.LoginForm;
 import com.axon.bank.service.BankService;
 
@@ -192,8 +197,38 @@ public class BankServiceImpl implements BankService {
 
 	@Override
 	public List<Object> getProgessStatus() {
-		
 		return bankDao.getProgessStatus();
+	}
+
+	@Override
+	public void storeDocument(FileForm fileform) {
+		System.err.println("-------------------------------------------");
+		try {
+			MultipartFile file = fileform.getFile();
+			String fileName = null;
+			InputStream inputStream = null;
+			OutputStream outputStream = null;
+			if (file.getSize() > 0) {
+				inputStream = file.getInputStream();
+				System.out.println("size::" + file.getSize());
+				fileName = "filesystem/" + fileform.getId() + "/" + fileform.getName() + "/"
+						+ file.getOriginalFilename();
+				outputStream = new FileOutputStream(fileName);
+				System.out.println("fileName:" + file.getOriginalFilename());
+
+				int readBytes = 0;
+				byte[] buffer = new byte[10000];
+				while ((readBytes = inputStream.read(buffer, 0, 10000)) != -1) {
+					outputStream.write(buffer, 0, readBytes);
+				}
+				outputStream.close();
+				inputStream.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

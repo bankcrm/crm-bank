@@ -2,8 +2,11 @@ package com.axon.bank.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.form.CustomerForm;
+import com.axon.bank.form.FileForm;
 import com.axon.bank.form.LoginForm;
 
 public interface BankService {
@@ -17,4 +20,5 @@ public interface BankService {
 	public List<CustomerForm> getAcceptedApplicants();
 	public String setAgentId(int id, String username);
 	public List<Object> getProgessStatus();
+	public void storeDocument(FileForm file);
 }
