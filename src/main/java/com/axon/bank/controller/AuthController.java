@@ -57,8 +57,10 @@ public class AuthController {
 		String role = authService.authUser(username, password);	
 		String nextPage="homePage";
 		if(role.length() > 0){
+			System.out.println("$$$$$$$%%%%%%-_______This is my auth-user method");
 			session.setAttribute("username", username);
 			session.setAttribute("role", role);
+			
 		}else{
 			return "login";
 		}
@@ -83,9 +85,11 @@ public class AuthController {
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		if(session!=null){
+			System.out.println("logout______@@@@@@@@@@@");
 			session.invalidate();
+			
 		}
-		System.out.println("logout______@@@@@@@@@@@");
+		
 		return "redirect:/index.jsp";
 	}
 }

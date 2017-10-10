@@ -238,14 +238,14 @@ function addprogressResult(row){
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
         <div class="panel-heading">Accepted Request</div>
-        <div class="panel-body"><img id="img2" src="${pageContext.request.contextPath}/img/user.png" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img id="img2" src="${pageContext.request.contextPath}/img/assign.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">All the accepted request are here</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-primary">
         <div class="panel-heading">Progress</div>
-        <div class="panel-body"><img id="img3" src="${pageContext.request.contextPath}/img/user.png" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img id="img3" src="${pageContext.request.contextPath}/img/bar.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">All the progress are here</div>
       </div>
     </div>

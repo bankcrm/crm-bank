@@ -133,7 +133,7 @@ public class BankController {
 	@RequestMapping(value="/progressStatus", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Object> getProgressList(){
-		System.out.println("$$$$$$%%%%%%%%@@@@@@_____");
+		System.out.println("$$$$$$%%%%%%%%@@@@@@_____Getting progressList in controller");
 		return bankService.getProgessStatus();
 	}
 	

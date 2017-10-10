@@ -57,6 +57,8 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		List<LoginEntity> agentList = (List<LoginEntity>)super.getHibernateTemplate().find("from LoginEntity where role='agent' and status = 1");
 	    return agentList;
 	}
+	
+	
 	/**
 	 * This method is to get the accepted request applicants at the team leader page
 	 * @author Jian
@@ -97,6 +99,7 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 	public String authUser(String username, String password){
 		String role = "";
 		List<LoginEntity>  list = (List<LoginEntity>) super.getHibernateTemplate().find("from loginEntity where username=? and password=? ", username, password);
+		
 		if(list.isEmpty()){
 			role="";
 		}else{
@@ -182,14 +185,14 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		
 		List<String> agentNameList = null;
 		agentNameList = (List<String>) super.getHibernateTemplate().find("select login.username from LoginEntity as login where login.role ='agent' and login.status = '1' and login.lid not in (select relationEntity.agent from AgentCustomerEntity as relationEntity  where relationEntity.agent !=1 )");
-		System.out.println("**&^^%%");
+		System.out.println("**&^^%% _________finding not working agents");
 		System.out.println(agentNameList);
 		return agentNameList;
 	}
 	
 	public List<Integer> findNotAssignCustomers(){
 		List<Integer> customerList = (List<Integer>) super.getHibernateTemplate().find("select relationEntity.customerId from AgentCustomerEntity as relationEntity where agent = 1");
-		System.out.println("----------*************&&&&&&&&&&");
+		System.out.println("----------*************&&&&&&&&&&______finding not assign customers");
 		System.out.println(customerList);
 		return customerList;
 	}

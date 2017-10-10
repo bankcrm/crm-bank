@@ -183,7 +183,7 @@ $(document).ready(function(){
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
+        <img src="${pageContext.request.contextPath}/img/bank1.jpg" alt="Image">
         <div class="carousel-caption">
           <h3>Borrow </h3>
           <p>Money Money.</p>
@@ -191,7 +191,7 @@ $(document).ready(function(){
       </div>
 
       <div class="item">
-        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+        <img src="${pageContext.request.contextPath}/img/bank.jpg" alt="Image">
         <div class="carousel-caption">
           <h3>More loan $</h3>
           <p>loan loan...</p>

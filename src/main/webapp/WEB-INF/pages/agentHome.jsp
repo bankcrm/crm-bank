@@ -152,6 +152,7 @@ function validate(id){
 </script>
 </head>
 <body>
+<%@include file="header.jsp" %>
 <a href="${pageContext.request.contextPath}/mybank/logout">logout</a><br/>
 <div style="background-color:#<%=JSPHelper.pickColor((String)request.getAttribute("username"))%>">
 <br>
@@ -197,9 +198,11 @@ function validate(id){
 		<br />
 		</div>
 		<div id="saved<%=id%>" style="display:none"><h4>Data saved!</h4></div>
+		
 <% 	id++;
 	}
 %>
 
+<%@include file="footer.jsp" %>
 </body>
 </html>
