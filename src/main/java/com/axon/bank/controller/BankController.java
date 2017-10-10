@@ -165,50 +165,6 @@ public class BankController {
 		return appMessageResponse;
 	}
 	
-	@RequestMapping(value="/docupload", method=RequestMethod.POST,
-			consumes={"application/json", "application/xml"},
-			produces={"application/json", "application/xml"})
-	@ResponseBody
-	public AppMessageResponse getCustomerDocument(@RequestBody FileForm fileForm){
-	System.out.println("Uploading document");
-	AppMessageResponse appMessageResponse = new AppMessageResponse();
-	appMessageResponse.setStatus("success");
-	appMessageResponse.setMessage("Customer Updated");
-	return appMessageResponse;
-	}
-	
-	
-	@RequestMapping(value = "/docupload/{id}/{name}", method = RequestMethod.POST,
-		    consumes = {"multipart/form-data"})
-		@ResponseBody
-		public boolean uploaddocument(
-		        @RequestPart("properties") @Valid ConnectionProperties properties,
-		        @RequestPart("file") @Valid @NotNull MultipartFile file) {
-		//@RequestPart("properties") ConnectionProperties properties,
-        //@RequestPart("file") MultipartFile file) {
-		System.out.println("File uploading");
-		int id;
-		String name;
-		//bankService.storeDocument(file,id,name);
-		return true;
-		    //return projectService.executeSampleService(project, file);
-	}
-	
-	@RequestMapping(value = "/uploaddocument/{id}/upload/uploads", method = RequestMethod.POST,
-		    consumes = {"multipart/form-data"})
-		@ResponseBody
-		public String upload(@ModelAttribute("FileForm") FileForm file, @PathVariable("id") int id) {
-		//@RequestPart("properties") ConnectionProperties properties,
-        //@RequestPart("file") MultipartFile file) {
-		System.out.println("File uploading");
-		System.out.println(file.getId());
-		System.out.println(file.getName());
-		bankService.storeDocument(file);
-		return "homePage";
-		    //return projectService.executeSampleService(project, file);
-	}
-
-	
 	@RequestMapping(value="/uploaddocument/{id}/{name}", method=RequestMethod.GET)
 	public String createLink(@PathVariable("id") int id, @PathVariable("name") String name, Model model){
 	model.addAttribute("name",name);
