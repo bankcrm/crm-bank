@@ -93,6 +93,20 @@ $(document).ready(function(){
 	});
 });
 function validate(id){
+	$("#amount"+id).val($("#amount"+id).val().replace(',',''))
+	if($("#amount"+id).val().charAt(0) == '$'){
+		$("#amount"+id).val($("#amount"+id).val().substring(1));
+	}
+	if($("#amount"+id).val().charAt($("#amount"+id).val().length-3) == '.'){
+		$("#amount"+id).val($("#amount"+id).val().substring(0,($("#amount").val().length-3)));
+	}
+	$("#salary"+id).val($("#salary"+id).val().replace(',',''))
+	if($("#salary"+id).val().charAt(0) == '$'){
+		$("#salary"+id).val($("#salary"+id).val().substring(1));
+	}
+	if($("#salary"+id).val().charAt($("#salary"+id).val().length-3) == '.'){
+		$("#salary"+id).val($("#salary"+id).val().substring(0,($("#salary"+id).val().length-3)));
+	}
 	console.log("validation start");
 	if($("#name"+id).val() == ""){
 		alert("A name must be given.");
