@@ -61,6 +61,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<%@include file = "header.jsp" %>
 
 <center><h1>Upload Loan File</h1></center> <br>
 <div style="background-color:#<%=JSPHelper.pickColor()%>">
@@ -82,7 +83,7 @@ $(document).ready(function(){
 	</fieldset>
 </form:form>
 
-
+<%@include file = "footer.jsp" %>
 </div>
 </body>
 </html>
