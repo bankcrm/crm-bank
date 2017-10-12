@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.form.CustomerForm;
 import com.axon.bank.form.FileForm;
@@ -25,4 +26,5 @@ public interface BankService {
 	public void setStatus(int id);
 	public void sendCompletedEmail(int id);
 	public void setDocument(int id);
+	public List<CustomerForm> getCompletedCustomers();
 }

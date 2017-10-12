@@ -1,5 +1,9 @@
 package com.axon.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 
 public class JSPHelper {
@@ -44,5 +48,11 @@ public class JSPHelper {
 		}
 		System.out.println(s);
 		return s;
+	}
+	
+	public static String display(File f){
+		String name = "File: " + f.getName();
+		String link = "<form method=\"post\" action=\"document\"><input id=\"file\" name=\"file\" type=\"hidden\" value=\"" + f.getAbsolutePath() + "\"> <input type=\"submit\" value=\"File Source\"></form>";
+		return name + link;
 	}
 }
