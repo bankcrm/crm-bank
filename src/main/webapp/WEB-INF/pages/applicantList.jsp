@@ -80,7 +80,8 @@ $(document).ready(function(){
 </head>
 <body>
 <%@include file = "header.jsp" %>
-<a href="${pageContext.request.contextPath}/mybank/logout">logout</a><br/>
+<center><a href="${pageContext.request.contextPath}/bank/approvedcustomers">View Completed Customers</a></center><br/>
+
 
 <center><h1>Currently Pending Loan Applications</h1></center> <br>
 <div class="container">
