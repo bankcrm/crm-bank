@@ -71,7 +71,12 @@ public class BankController {
 		appMessageResponse.setDescription("applicant is uploaded using rest api");
 		return appMessageResponse;
 	}
-	
+	@RequestMapping(value="applyloan", method=RequestMethod.POST)
+	public String uploadApplicantWithOutRest(@ModelAttribute ApplicantForm applicantForm, Model model){
+		System.out.println(applicantForm);
+		bankService.add(applicantForm);
+		return "login";
+	}
 
 	@RequestMapping(value="viewApplicants", method=RequestMethod.GET)
 	public String printApplicants(Model model){
