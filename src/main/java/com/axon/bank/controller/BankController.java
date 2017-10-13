@@ -1,12 +1,17 @@
 package com.axon.bank.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import com.axon.bank.dao.entity.CustomerEntity;
 import com.axon.bank.form.ApplicantForm;
 import com.axon.bank.form.CustomerForm;
 import com.axon.bank.form.FileForm;
@@ -222,7 +228,7 @@ public class BankController {
 				System.err.println("Error: " + error.getCode() + " - "
 						+ error.getDefaultMessage());
 			}
-			return "/"+name;
+			return "redirect:/bank/uploaddocument/" + id + "/" + name;
 		}
 
 		// Some type of file processing...
@@ -230,21 +236,29 @@ public class BankController {
 		try {
 			MultipartFile file = uploadItem.getFileData();
 			String fileName = null;
+			ClassLoader cl = this.getClass().getClassLoader();
 			InputStream inputStream = null;
 			OutputStream outputStream = null;
+			
+			/*File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+			f = f.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile();
+			String path = f.toString() + "/crm-bank";*/
+			String path = System.getProperty("user.home");
+
+
 			if (file.getSize() > 0) {
 				inputStream = file.getInputStream();
 				if (file.getSize() > 100000) {
 					System.out.println("File Size:::" + file.getSize());
-					return "/"+name;
+					return "redirect:/bank/uploaddocument/" + id + "/" + name;
 				}
 				System.out.println("size::" + file.getSize());
-				File filepath = new File(System.getProperty("user.home") + "/BankFileSystem/" + id + "/" + name);
+				File filepath = new File(path + "/BankFileSystem/" + id + "/" + name);
 				System.out.println(filepath.getAbsolutePath());
 				if(!filepath.exists()){
 					filepath.mkdirs();
 				}
-				fileName = System.getProperty("user.home") + "/BankFileSystem/" + id + "/" + name + "/"  
+				fileName = path + "/BankFileSystem/" + id + "/" + name + "/"  
 						+ file.getOriginalFilename();
 				outputStream = new FileOutputStream(fileName);
 				System.out.println("fileName:" + file.getOriginalFilename());
@@ -257,13 +271,77 @@ public class BankController {
 				outputStream.close();
 				inputStream.close();
 			} else {
-				return "/"+name;
+				return "redirect:/bank/uploaddocument/" + id + "/" + name;
 			}
 			bankService.setDocument(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/bank/agentcustomers";
+	}
+	
+	@RequestMapping(value="/document", method = RequestMethod.POST)
+	public void viewDocument(@RequestBody String file,HttpServletRequest req,HttpServletResponse resp){
+		System.out.println(file);
+		file=file.substring(5).replaceAll("%3A", ":").replaceAll("%5C", "/").replaceAll("\\+", " ");
+		System.out.println(file); 
+		try {
+			InputStream inputStream = null;
+			
+				inputStream = new FileInputStream(new File(file));
+
+				int readBytes = 0;
+				byte[] buffer = new byte[100000];
+				while ((readBytes = inputStream.read(buffer, 0, 100000)) != -1) {
+					
+				}
+				String mimeType= URLConnection.guessContentTypeFromName(new File(file).getName());
+				System.out.println(mimeType);
+				 resp.setContentType(mimeType);
+				 ServletOutputStream outputStream=resp.getOutputStream();
+				 if(buffer!=null) {
+					 outputStream.write(buffer);
+					 outputStream.flush();
+				 }
+
+				outputStream.close();
+				inputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/approvedcustomers", method = RequestMethod.GET)
+	public String viewFinishedCustomers(Model model){
+		List<CustomerForm> customers = bankService.getCompletedCustomers();
+		HashMap<Integer,File[]> files = new HashMap<>();
+		
+		/*File f = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+		System.out.println(f.toString());
+		f = f.getParentFile();
+		System.out.println(f);*/
+		
+		// Some type of file processing...
+		System.err.println("-------------------------------------------");
+		for(CustomerForm customer: customers){
+			try {
+				String fileName = System.getProperty("user.home") + "/BankFileSystem/" + customer.getId() + "/" + customer.getName();
+			
+					File filepath = new File(fileName);
+					File[] idFiles = filepath.listFiles();
+					files.put(customer.getId(), idFiles);
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+		model.addAttribute("customers", customers);
+		model.addAttribute("files",files);
+		System.out.println(files);
+		return "completedcustomers";
 	}
 
 	

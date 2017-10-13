@@ -316,4 +316,16 @@ public class BankServiceImpl implements BankService {
 		updateStatus(customer);
 	}
 
+	@Override
+	public List<CustomerForm> getCompletedCustomers() {
+		List<CustomerEntity> customers = bankDao.getCompletedCustomers();
+		List<CustomerForm> formList = new ArrayList<CustomerForm>();
+		for(CustomerEntity entity : customers){
+			CustomerForm applicantForm = new CustomerForm();
+			BeanUtils.copyProperties(entity, applicantForm);
+			formList.add(applicantForm);
+		}
+		return formList;
+	}
+
 }

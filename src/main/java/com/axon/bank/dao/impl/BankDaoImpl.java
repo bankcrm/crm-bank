@@ -312,4 +312,14 @@ public class BankDaoImpl extends HibernateDaoSupport implements BankDao{
 		return customer.get(0);
 	}
 
+	@Override
+	public List<CustomerEntity> getCompletedCustomers() {
+		List<AgentCustomerEntity> relations = (List<AgentCustomerEntity>) super.getHibernateTemplate().find("from AgentCustomerEntity where status = 101.0");
+		List<CustomerEntity> customers = new ArrayList<>();
+		for(AgentCustomerEntity relation: relations){
+			customers.addAll((List<CustomerEntity>)super.getHibernateTemplate().find("from CustomerEntity where id = " + relation.getCustomerId()));
+		}
+		return customers;
+	}
+
 }
